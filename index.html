@@ -1,2119 +1,1122 @@
 <!doctype html>
 <html lang="fr">
- <head>
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Présentation Life Skills MLPB</title>
   <script src="/_sdk/element_sdk.js"></script>
   <style>
-        body {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', 'Montserrat', sans-serif;
-            background: #FFFFFF;
-            min-height: 100%;
-            height: 100%;
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        html {
-            height: 100%;
-        }
-
-        /* Formes décoratives en arrière-plan */
-        .background-shapes {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .shape-circle {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.15;
-        }
-
-        .shape-puzzle {
-            position: absolute;
-            opacity: 0.1;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 60px 40px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 80px;
-            position: relative;
-        }
-
-        .header h1 {
-            color: #C41E3A;
-            font-size: 48px;
-            font-weight: 900;
-            font-family: 'Fredoka', 'Baloo', 'Nunito', sans-serif;
-            margin: 0 0 20px 0;
-            line-height: 1.2;
-            letter-spacing: -0.5px;
-        }
-
-        /* Bloc récapitulatif des 4 axes */
-        .summary-block {
-            background: linear-gradient(135deg, #FFFFFF 0%, #F8F9FA 100%);
-            border-radius: 32px;
-            padding: 50px;
-            margin-bottom: 60px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            border: 3px solid #F0F0F0;
-        }
-
-        .summary-title {
-            text-align: center;
-            font-size: 32px;
-            font-weight: 900;
-            color: #C41E3A;
-            margin-bottom: 40px;
-            font-family: 'Fredoka', 'Baloo', 'Nunito', sans-serif;
-        }
-
-        .summary-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-        }
-
-        .summary-item {
-            background: #FFFFFF;
-            border-radius: 20px;
-            padding: 30px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .summary-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-        }
-
-        .summary-item.item-1 {
-            border-left: 6px solid #C41E3A;
-        }
-
-        .summary-item.item-1:hover {
-            border-color: #C41E3A;
-        }
-
-        .summary-item.item-2 {
-            border-left: 6px solid #FFB347;
-        }
-
-        .summary-item.item-2:hover {
-            border-color: #FFB347;
-        }
-
-        .summary-item.item-3 {
-            border-left: 6px solid #20C997;
-        }
-
-        .summary-item.item-3:hover {
-            border-color: #20C997;
-        }
-
-        .summary-item.item-4 {
-            border-left: 6px solid #00CED1;
-        }
-
-        .summary-item.item-4:hover {
-            border-color: #00CED1;
-        }
-
-        .summary-number {
-            font-size: 16px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 12px;
-            opacity: 0.8;
-        }
-
-        .summary-item.item-1 .summary-number {
-            color: #C41E3A;
-        }
-
-        .summary-item.item-2 .summary-number {
-            color: #FFB347;
-        }
-
-        .summary-item.item-3 .summary-number {
-            color: #20C997;
-        }
-
-        .summary-item.item-4 .summary-number {
-            color: #00CED1;
-        }
-
-        .summary-item-title {
-            font-size: 24px;
-            font-weight: 800;
-            margin-bottom: 15px;
-            font-family: 'Fredoka', 'Baloo', 'Nunito', sans-serif;
-            color: #212529;
-        }
-
-        .summary-finalite {
-            font-size: 15px;
-            line-height: 1.7;
-            color: #495057;
-        }
-
-        @media (max-width: 1024px) {
-            .summary-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .summary-block {
-                padding: 40px 30px;
-            }
-
-            .summary-title {
-                font-size: 26px;
-            }
-        }
-
-        /* Bloc englobant les 4 axes */
-        .axes-wrapper {
-            background: linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%);
-            border-radius: 40px;
-            padding: 50px;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
-            border: 4px solid #E9ECEF;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .axes-wrapper::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(196, 30, 58, 0.08) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        .axes-wrapper::after {
-            content: '';
-            position: absolute;
-            bottom: -50%;
-            left: -10%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(0, 206, 209, 0.08) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        .axes-wrapper-header {
-            text-align: center;
-            margin-bottom: 50px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .axes-wrapper-title {
-            font-size: 38px;
-            font-weight: 900;
-            color: #212529;
-            margin-bottom: 15px;
-            font-family: 'Fredoka', 'Baloo', 'Nunito', sans-serif;
-            background: linear-gradient(135deg, #C41E3A 0%, #00CED1 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .axes-wrapper-subtitle {
-            font-size: 17px;
-            color: #6C757D;
-            font-weight: 500;
-            margin: 0;
-        }
-
-        @media (max-width: 1024px) {
-            .axes-wrapper {
-                padding: 40px 30px;
-            }
-
-            .axes-wrapper-title {
-                font-size: 28px;
-            }
-
-            .axes-wrapper-subtitle {
-                font-size: 15px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .axes-wrapper {
-                padding: 30px 20px;
-                border-radius: 24px;
-            }
-
-            .axes-wrapper-header {
-                margin-bottom: 30px;
-            }
-        }
-
-        .axes-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 40px;
-            margin-bottom: 60px;
-        }
-
-        .axe-card {
-            background: #FFFFFF;
-            border-radius: 32px;
-            padding: 0;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .axe-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
-        }
-
-        .axe-header {
-            padding: 40px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .axe-card.axe-1 .axe-header {
-            background: linear-gradient(135deg, #C41E3A 0%, #E74C3C 100%);
-        }
-
-        .axe-card.axe-2 .axe-header {
-            background: linear-gradient(135deg, #FFB347 0%, #FFC470 100%);
-        }
-
-        .axe-card.axe-3 .axe-header {
-            background: linear-gradient(135deg, #20C997 0%, #3DDBBD 100%);
-        }
-
-        .axe-card.axe-4 .axe-header {
-            background: linear-gradient(135deg, #00CED1 0%, #48D1CC 100%);
-        }
-
-        /* Cercles décoratifs dans les en-têtes */
-        .axe-header::before {
-            content: '';
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.15);
-            top: -80px;
-            right: -80px;
-        }
-
-        .axe-header::after {
-            content: '';
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            bottom: -40px;
-            left: -40px;
-        }
-
-        .axe-number {
-            font-size: 16px;
-            font-weight: 800;
-            text-transform: uppercase;
-            margin-bottom: 12px;
-            color: rgba(255, 255, 255, 0.9);
-            letter-spacing: 2px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .axe-title {
-            font-size: 32px;
-            font-weight: 900;
-            margin-bottom: 20px;
-            color: #FFFFFF;
-            font-family: 'Fredoka', 'Baloo', 'Nunito', sans-serif;
-            line-height: 1.2;
-            position: relative;
-            z-index: 1;
-        }
-
-        .axe-finalite {
-            font-size: 16px;
-            color: rgba(255, 255, 255, 0.95);
-            line-height: 1.7;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .expand-icon {
-            display: inline-block;
-            font-size: 24px;
-            color: #FFFFFF;
-            transition: transform 0.3s ease;
-            position: relative;
-            z-index: 1;
-        }
-
-        .axe-card.expanded .expand-icon {
-            transform: rotate(180deg);
-        }
-
-        .axe-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            padding: 0 40px;
-        }
-
-        .axe-card.expanded .axe-content {
-            max-height: 8000px;
-            padding: 20px 40px 40px 40px;
-        }
-
-        /* Styles pour les outils p��dagogiques */
-        .tool-card {
-            background: #FFFFFF;
-            border-radius: 24px;
-            margin-top: 20px;
-            border: 2px solid #E9ECEF;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tool-card:hover {
-            border-color: #DEE2E6;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-        }
-
-        .tool-card.expanded {
-            border-color: #CED4DA;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .tool-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 24px 28px;
-            background: #F8F9FA;
-        }
-
-        .tool-card.expanded .tool-header {
-            background: linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%);
-        }
-
-        .tool-icon {
-            font-size: 32px;
-            flex-shrink: 0;
-        }
-
-        .tool-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: #212529;
-            font-family: 'Fredoka', 'Baloo', 'Nunito', sans-serif;
-            flex-grow: 1;
-        }
-
-        .tool-toggle {
-            font-size: 18px;
-            color: #6C757D;
-            transition: transform 0.3s ease;
-            flex-shrink: 0;
-        }
-
-        .tool-card.expanded .tool-toggle {
-            transform: rotate(180deg);
-        }
-
-        .tool-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .tool-card.expanded .tool-content {
-            max-height: 5000px;
-        }
-
-        .tool-section {
-            padding: 24px 28px;
-            border-top: 1px solid #E9ECEF;
-        }
-
-        .tool-section:first-child {
-            border-top: none;
-        }
-
-        .tool-section-title {
-            font-size: 17px;
-            font-weight: 800;
-            color: #495057;
-            margin: 0 0 16px 0;
-            font-family: 'Fredoka', 'Baloo', 'Nunito', sans-serif;
-        }
-
-        .theme-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 24px;
-        }
-
-        .theme-item {
-            background: #FFFFFF;
-            border-radius: 16px;
-            padding: 0;
-            border: 2px solid #E9ECEF;
-            transition: all 0.3s ease;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .theme-item:hover {
-            border-color: #CED4DA;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-            transform: translateY(-4px);
-        }
-
-        .theme-item-header {
-            padding: 16px 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            position: relative;
-        }
-
-        .axe-card.axe-1 .theme-item-header {
-            background: linear-gradient(135deg, rgba(196, 30, 58, 0.1) 0%, rgba(196, 30, 58, 0.05) 100%);
-        }
-
-        .axe-card.axe-2 .theme-item-header {
-            background: linear-gradient(135deg, rgba(255, 179, 71, 0.1) 0%, rgba(255, 179, 71, 0.05) 100%);
-        }
-
-        .axe-card.axe-3 .theme-item-header {
-            background: linear-gradient(135deg, rgba(32, 201, 151, 0.1) 0%, rgba(32, 201, 151, 0.05) 100%);
-        }
-
-        .axe-card.axe-4 .theme-item-header {
-            background: linear-gradient(135deg, rgba(0, 206, 209, 0.1) 0%, rgba(0, 206, 209, 0.05) 100%);
-        }
-
-        .theme-icon {
-            font-size: 28px;
-            flex-shrink: 0;
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 12px;
-            background: #FFFFFF;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
-
-        .theme-item strong {
-            font-size: 16px;
-            font-weight: 800;
-            color: #212529;
-            font-family: 'Fredoka', 'Baloo', 'Nunito', sans-serif;
-            flex-grow: 1;
-        }
-
-        .theme-item-content {
-            padding: 16px 20px 20px 20px;
-        }
-
-        .theme-item p {
-            font-size: 14px;
-            color: #495057;
-            line-height: 1.7;
-            margin: 0;
-        }
-
-        .theme-badge {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-        }
-
-        .axe-card.axe-1 .theme-badge {
-            background: #C41E3A;
-        }
-
-        .axe-card.axe-2 .theme-badge {
-            background: #FFB347;
-        }
-
-        .axe-card.axe-3 .theme-badge {
-            background: #20C997;
-        }
-
-        .axe-card.axe-4 .theme-badge {
-            background: #00CED1;
-        }
-
-        .skill-description {
-            font-size: 15px;
-            color: #495057;
-            line-height: 1.8;
-            margin-bottom: 12px;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .skill-description:last-child {
-            margin-bottom: 0;
-        }
-
-        .skill-description::before {
-            content: '●';
-            position: absolute;
-            left: 0;
-            font-size: 12px;
-        }
-
-        .axe-card.axe-1 .skill-description::before {
-            color: #C41E3A;
-        }
-
-        .axe-card.axe-2 .skill-description::before {
-            color: #FFB347;
-        }
-
-        .axe-card.axe-3 .skill-description::before {
-            color: #20C997;
-        }
-
-        .axe-card.axe-4 .skill-description::before {
-            color: #00CED1;
-        }
-
-        /* Frise décorative en bas */
-        .bottom-decoration {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 12px;
-            display: flex;
-            z-index: 0;
-        }
-
-        .decoration-segment {
-            flex: 1;
-        }
-
-        .decoration-segment:nth-child(1) { background: #FFE66D; }
-        .decoration-segment:nth-child(2) { background: #00CED1; }
-        .decoration-segment:nth-child(3) { background: #C41E3A; }
-        .decoration-segment:nth-child(4) { background: #A0E7E5; }
-        .decoration-segment:nth-child(5) { background: #FFB347; }
-        .decoration-segment:nth-child(6) { background: #20C997; }
-
-        @media (max-width: 1024px) {
-            .axes-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .header h1 {
-                font-size: 36px;
-            }
-
-            .axe-title {
-                font-size: 26px;
-            }
-
-            .container {
-                padding: 40px 24px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 28px;
-            }
-
-            .axe-header {
-                padding: 30px;
-            }
-
-            .axe-content {
-                padding: 0 30px;
-            }
-
-            .axe-card.expanded .axe-content {
-                padding: 20px 30px 30px 30px;
-            }
-
-            .theme-grid {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-
-            .tool-header {
-                padding: 20px;
-                gap: 12px;
-            }
-
-            .tool-icon {
-                font-size: 28px;
-            }
-
-            .tool-title {
-                font-size: 18px;
-            }
-
-            .tool-section {
-                padding: 20px;
-            }
-        }
-    </style>
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', 'Montserrat', sans-serif;
+      background: #FFFFFF;
+      min-height: 100%;
+      height: 100%;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    html {
+      height: 100%;
+    }
+
+    /* Formes décoratives en arrière-plan */
+    .background-shapes {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .shape-circle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.15;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 60px 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 60px;
+      position: relative;
+    }
+
+    .header h1 {
+      color: #C41E3A;
+      font-size: 42px;
+      font-weight: 900;
+      font-family: 'Fredoka', 'Baloo', 'Nunito', sans-serif;
+      margin: 0 0 12px 0;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+    }
+
+    .header p {
+      margin: 8px 0 0;
+      font-size: 16px;
+      color: #495057;
+      line-height: 1.6;
+    }
+
+    .axes-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .axe-card {
+      background: #FFFFFF;
+      border-radius: 32px;
+      padding: 0;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .axe-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .axe-header {
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .axe-card.axe-1 .axe-header {
+      background: linear-gradient(135deg, #C41E3A 0%, #E74C3C 100%);
+    }
+
+    .axe-card.axe-2 .axe-header {
+      background: linear-gradient(135deg, #FFB347 0%, #FFC470 100%);
+    }
+
+    .axe-card.axe-3 .axe-header {
+      background: linear-gradient(135deg, #20C997 0%, #3DDBBD 100%);
+    }
+
+    .axe-card.axe-4 .axe-header {
+      background: linear-gradient(135deg, #00CED1 0%, #48D1CC 100%);
+    }
+
+    /* Cercles décoratifs dans les en-têtes */
+    .axe-header::before {
+      content: '';
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      top: -80px;
+      right: -80px;
+    }
+
+    .axe-header::after {
+      content: '';
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      bottom: -40px;
+      left: -40px;
+    }
+
+    .axe-number {
+      font-size: 16px;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      color: rgba(255, 255, 255, 0.9);
+      letter-spacing: 2px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .axe-title {
+      font-size: 32px;
+      font-weight: 900;
+      margin-bottom: 16px;
+      color: #FFFFFF;
+      font-family: 'Fredoka', 'Baloo', 'Nunito', sans-serif;
+      line-height: 1.2;
+      position: relative;
+      z-index: 1;
+    }
+
+    .axe-finalite {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.95);
+      line-height: 1.7;
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .axe-meta {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.8);
+      position: relative;
+      z-index: 1;
+    }
+
+    .expand-icon {
+      display: inline-block;
+      font-size: 24px;
+      color: #FFFFFF;
+      transition: transform 0.3s ease;
+      position: relative;
+      z-index: 1;
+      margin-top: 10px;
+    }
+
+    .axe-card.expanded .expand-icon {
+      transform: rotate(180deg);
+    }
+
+    .axe-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 0 40px;
+      background: #FFFFFF;
+    }
+
+    .axe-card.expanded .axe-content {
+      max-height: 4000px;
+      padding: 24px 40px 40px 40px;
+    }
+
+    .axe-subtitle {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #6C757D;
+      margin-bottom: 8px;
+    }
+
+    .axe-text {
+      font-size: 14px;
+      color: #495057;
+      margin-bottom: 16px;
+      line-height: 1.7;
+    }
+
+    .skill-item {
+      background: #F8F9FA;
+      border-radius: 20px;
+      padding: 24px;
+      margin-top: 18px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .skill-item:hover {
+      background: #E9ECEF;
+      transform: translateX(8px);
+    }
+
+    .axe-card.axe-1 .skill-item:hover {
+      box-shadow: -4px 0 0 #C41E3A;
+    }
+
+    .axe-card.axe-2 .skill-item:hover {
+      box-shadow: -4px 0 0 #FFB347;
+    }
+
+    .axe-card.axe-3 .skill-item:hover {
+      box-shadow: -4px 0 0 #20C997;
+    }
+
+    .axe-card.axe-4 .skill-item:hover {
+      box-shadow: -4px 0 0 #00CED1;
+    }
+
+    .skill-item.expanded {
+      background: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .skill-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .skill-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #212529;
+      font-family: 'Fredoka', 'Baloo', 'Nunito', sans-serif;
+    }
+
+    .skill-meta {
+      font-size: 13px;
+      color: #6C757D;
+    }
+
+    .skill-toggle {
+      font-size: 18px;
+      color: #6C757D;
+      transition: transform 0.3s ease;
+    }
+
+    .skill-item.expanded .skill-toggle {
+      transform: rotate(180deg);
+    }
+
+    .skill-details {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      margin-top: 0;
+    }
+
+    .skill-item.expanded .skill-details {
+      max-height: 800px;
+      margin-top: 16px;
+    }
+
+    .skill-section-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #868E96;
+      margin: 10px 0 4px;
+    }
+
+    .skill-description {
+      font-size: 14px;
+      color: #495057;
+      line-height: 1.8;
+      margin-bottom: 6px;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .skill-description:last-child {
+      margin-bottom: 0;
+    }
+
+    .skill-description::before {
+      content: '●';
+      position: absolute;
+      left: 0;
+      font-size: 10px;
+      top: 3px;
+    }
+
+    .axe-card.axe-1 .skill-description::before {
+      color: #C41E3A;
+    }
+
+    .axe-card.axe-2 .skill-description::before {
+      color: #FFB347;
+    }
+
+    .axe-card.axe-3 .skill-description::before {
+      color: #20C997;
+    }
+
+    .axe-card.axe-4 .skill-description::before {
+      color: #00CED1;
+    }
+
+    .activity-tag {
+      display: inline-block;
+      margin: 4px 4px 0 0;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      background: #F1F3F5;
+      color: #495057;
+    }
+
+    .axe-card.axe-1 .activity-tag {
+      border: 1px solid rgba(196, 30, 58, 0.2);
+    }
+
+    .axe-card.axe-2 .activity-tag {
+      border: 1px solid rgba(255, 179, 71, 0.2);
+    }
+
+    .axe-card.axe-3 .activity-tag {
+      border: 1px solid rgba(32, 201, 151, 0.2);
+    }
+
+    .axe-card.axe-4 .activity-tag {
+      border: 1px solid rgba(0, 206, 209, 0.2);
+    }
+
+    /* Frise décorative en bas */
+    .bottom-decoration {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 12px;
+      display: flex;
+      z-index: 0;
+    }
+
+    .decoration-segment {
+      flex: 1;
+    }
+
+    .decoration-segment:nth-child(1) { background: #FFE66D; }
+    .decoration-segment:nth-child(2) { background: #00CED1; }
+    .decoration-segment:nth-child(3) { background: #C41E3A; }
+    .decoration-segment:nth-child(4) { background: #A0E7E5; }
+    .decoration-segment:nth-child(5) { background: #FFB347; }
+    .decoration-segment:nth-child(6) { background: #20C997; }
+
+    @media (max-width: 1024px) {
+      .axes-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .header h1 {
+        font-size: 34px;
+      }
+
+      .axe-title {
+        font-size: 26px;
+      }
+
+      .container {
+        padding: 40px 24px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 26px;
+      }
+
+      .axe-header {
+        padding: 30px;
+      }
+
+      .axe-content {
+        padding: 0 30px;
+      }
+
+      .axe-card.expanded .axe-content {
+        padding: 20px 30px 30px 30px;
+      }
+
+      .skill-item {
+        padding: 20px;
+      }
+    }
+  </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
   <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
- </head>
- <body><!-- Formes décoratives en arrière-plan -->
+</head>
+<body>
+  <!-- Formes décoratives en arrière-plan -->
   <div class="background-shapes">
-   <div class="shape-circle" style="width: 300px; height: 300px; background: #FFE66D; top: 10%; left: 5%;"></div>
-   <div class="shape-circle" style="width: 200px; height: 200px; background: #00CED1; top: 40%; right: 8%;"></div>
-   <div class="shape-circle" style="width: 150px; height: 150px; background: #A0E7E5; bottom: 20%; left: 15%;"></div>
-   <div class="shape-circle" style="width: 180px; height: 180px; background: #FFB347; top: 65%; right: 20%;"></div>
+    <div class="shape-circle" style="width: 300px; height: 300px; background: #FFE66D; top: 10%; left: 5%;"></div>
+    <div class="shape-circle" style="width: 200px; height: 200px; background: #00CED1; top: 40%; right: 8%;"></div>
+    <div class="shape-circle" style="width: 150px; height: 150px; background: #A0E7E5; bottom: 20%; left: 15%;"></div>
+    <div class="shape-circle" style="width: 180px; height: 180px; background: #FFB347; top: 65%; right: 20%;"></div>
   </div>
+
   <div class="container">
-   <div class="header">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; padding: 0 20px;"><img src="https://static.wixstatic.com/media/dd5dab_47743b1c86024865ba19e623a3db327f~mv2.avif/v1/fill/w_224,h_60,al_c,q_80,enc_avif,quality_auto/dd5dab_47743b1c86024865ba19e623a3db327f~mv2.avif" alt="Logo Mission Locale" style="height: 60px; width: auto; max-width: 200px;" onerror="this.style.display='block'; this.alt='Logo Mission Locale'; console.error('Logo 1 failed');"> <img src="https://www.lifeskills4youth.eu/wp-content/uploads/2024/07/LS4YOU_Logo.png" alt="Life Skills 4 Youth Logo" style="height: 60px; width: auto; max-width: 200px; display: block;" onerror="this.style.backgroundColor='#f0f0f0'; this.style.padding='10px'; this.alt='Life Skills 4 Youth Logo'; console.error('Logo 2 failed');">
+    <div class="header">
+      <h1 id="main-title">Les 4 Axes Life Skills = 4 grandes familles de compétences</h1>
+      <p>
+        Cliquez sur chaque axe pour dérouler les <strong>compétences</strong>, les <strong>sous-compétences</strong> 
+        et quelques <strong>activités LS4YOU</strong> associées.  
+        Objectif : donner aux conseillers un langage commun pour lire un parcours par les compétences.
+      </p>
     </div>
-    <h1 id="main-title">Les 4 axes Life Skills = 4 grandes familles de compétences</h1>
-   </div><!-- Bloc récapitulatif des 4 axes -->
-   <div class="summary-block">
-    <h2 class="summary-title">📋 Récapitulatif des 4 Axes Life Skills</h2>
-    <div class="summary-grid">
-     <div class="summary-item item-1">
-      <div class="summary-number">
-       Axe 1
+
+    <!-- GRID DES 4 AXES -->
+    <div class="axes-grid">
+
+      <!-- AXE 1 : PERSONNALITÉ -->
+      <div class="axe-card axe-1" onclick="toggleAxe(this)">
+        <div class="axe-header">
+          <div class="axe-number">Axe 1</div>
+          <div class="axe-title">PERSONNALITÉ</div>
+          <div class="axe-finalite">
+            <strong>Finalité :</strong> savoir qui je suis, ce que je veux, comment je fonctionne, et comment je décide.
+          </div>
+          <div class="axe-meta">
+            Entrées ML : orientation, projet, motivation, persévérance, gestion du changement.
+          </div>
+          <div style="text-align: center;">
+            <span class="expand-icon">▼</span>
+          </div>
+        </div>
+
+        <div class="axe-content">
+          <div class="axe-subtitle">Compétences-clés Life Skills</div>
+          <div class="axe-text">
+            Conscience de soi, identité, valeurs, motivation, prise de décision, auto-régulation.
+          </div>
+
+          <!-- Conscience de soi -->
+          <div class="skill-item" onclick="event.stopPropagation(); toggleSkill(this)">
+            <div class="skill-header">
+              <div>
+                <div class="skill-title">Conscience de soi</div>
+                <div class="skill-meta">Qui je suis, comment je fonctionne, ce que je ressens</div>
+              </div>
+              <span class="skill-toggle">▼</span>
+            </div>
+            <div class="skill-details">
+              <div class="skill-section-title">Sous-compétences</div>
+              <div class="skill-description">Identifier ses forces, ses limites, ses besoins, ses vulnérabilités.</div>
+              <div class="skill-description">Mettre des mots sur ses émotions et ses réactions typiques.</div>
+              <div class="skill-description">Repérer ses déclencheurs (ce qui m’apaise / ce qui m’active).</div>
+
+              <div class="skill-section-title">Exemples d’activités LS4YOU associées</div>
+              <span class="activity-tag">Test des 16 personnalités (MBTI)</span>
+              <span class="activity-tag">Moi à mon meilleur</span>
+              <span class="activity-tag">Forces & défis</span>
+            </div>
+          </div>
+
+          <!-- Identité & valeurs -->
+          <div class="skill-item" onclick="event.stopPropagation(); toggleSkill(this)">
+            <div class="skill-header">
+              <div>
+                <div class="skill-title">Identité &amp; valeurs</div>
+                <div class="skill-meta">Ce qui compte pour moi, ce qui me ressemble</div>
+              </div>
+              <span class="skill-toggle">▼</span>
+            </div>
+            <div class="skill-details">
+              <div class="skill-section-title">Sous-compétences</div>
+              <div class="skill-description">Savoir ce qui est important pour soi (respect, liberté, famille, sécurité...).</div>
+              <div class="skill-description">Distinguer ce qui vient de soi / de la famille / du groupe / des réseaux sociaux.</div>
+              <div class="skill-description">Accepter que son identité puisse évoluer (réorientation, nouvelles expériences).</div>
+
+              <div class="skill-section-title">Exemples d’activités LS4YOU associées</div>
+              <span class="activity-tag">Besoins, valeurs, objectifs de vie</span>
+              <span class="activity-tag">Mon magazine perso (Zine)</span>
+            </div>
+          </div>
+
+          <!-- Motivation & sens -->
+          <div class="skill-item" onclick="event.stopPropagation(); toggleSkill(this)">
+            <div class="skill-header">
+              <div>
+                <div class="skill-title">Motivation &amp; sens</div>
+                <div class="skill-meta">Pourquoi je m’engage, ce qui me fait tenir</div>
+              </div>
+              <span class="skill-toggle">▼</span>
+            </div>
+            <div class="skill-details">
+              <div class="skill-section-title">Sous-compétences</div>
+              <div class="skill-description">
+                Comprendre ce qui me donne envie de m’engager (intérêt, utilité, reconnaissance…).
+              </div>
+              <div class="skill-description">Maintenir un minimum d’effort dans la durée.</div>
+              <div class="skill-description">Se remettre en mouvement après un échec ou une rupture.</div>
+
+              <div class="skill-section-title">Exemples d’activités LS4YOU associées</div>
+              <span class="activity-tag">Moi à mon meilleur</span>
+              <span class="activity-tag">Arbre de la résilience</span>
+            </div>
+          </div>
+
+          <!-- Prise de décision -->
+          <div class="skill-item" onclick="event.stopPropagation(); toggleSkill(this)">
+            <div class="skill-header">
+              <div>
+                <div class="skill-title">Prise de décision</div>
+                <div class="skill-meta">Faire des choix réalistes, assumés et ajustables</div>
+              </div>
+              <span class="skill-toggle">▼</span>
+            </div>
+            <div class="skill-details">
+              <div class="skill-section-title">Sous-compétences</div>
+              <div class="skill-description">
+                Poser un choix en tenant compte de la réalité (temps, argent, contraintes).
+              </div>
+              <div class="skill-description">
+                Comparer des options (avantages / inconvénients) et hiérarchiser.
+              </div>
+              <div class="skill-description">
+                Assumer un choix fait, sans s’effondrer si tout n’est pas parfait.
+              </div>
+
+              <div class="skill-section-title">Exemples d’activités LS4YOU associées</div>
+              <span class="activity-tag">Mindmapping « Faites le point »</span>
+              <span class="activity-tag">Vraie vie, vrais défis</span>
+            </div>
+          </div>
+
+          <!-- Auto-régulation -->
+          <div class="skill-item" onclick="event.stopPropagation(); toggleSkill(this)">
+            <div class="skill-header">
+              <div>
+                <div class="skill-title">Auto-régulation</div>
+                <div class="skill-meta">Gérer ses réactions sans se renier</div>
+              </div>
+              <span class="skill-toggle">▼</span>
+            </div>
+            <div class="skill-details">
+              <div class="skill-section-title">Sous-compétences</div>
+              <div class="skill-description">
+                Gérer ses impulsions (réactions à chaud, messages envoyés trop vite, absences…).
+              </div>
+              <div class="skill-description">Se parler de façon moins dure (dialogue interne).</div>
+              <div class="skill-description">
+                Ajuster son comportement en fonction du contexte sans perdre son identité.
+              </div>
+
+              <div class="skill-section-title">Exemples d’activités LS4YOU associées</div>
+              <span class="activity-tag">Roue des émotions</span>
+              <span class="activity-tag">Stressomètre</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <h3 class="summary-item-title">PERSONNALITÉ</h3>
-      <p class="summary-finalite"><strong>Finalité :</strong> savoir qui je suis, ce que je veux, comment je fonctionne, et comment je décide.</p>
-     </div>
-     <div class="summary-item item-2">
-      <div class="summary-number">
-       Axe 2
+
+      <!-- AXE 2 : VALORISATION DE SOI -->
+      <div class="axe-card axe-2" onclick="toggleAxe(this)">
+        <div class="axe-header">
+          <div class="axe-number">Axe 2</div>
+          <div class="axe-title">VALORISATION DE SOI</div>
+          <div class="axe-finalite">
+            <strong>Finalité :</strong> être capable de se présenter, de prendre sa place, de transformer ce que je fais en ressources.
+          </div>
+          <div class="axe-meta">
+            Entrées ML : CV, entretien, relation aux pros, citoyenneté, participation.
+          </div>
+          <div style="text-align: center;">
+            <span class="expand-icon">▼</span>
+          </div>
+        </div>
+
+        <div class="axe-content">
+          <div class="axe-subtitle">Compétences-clés Life Skills</div>
+          <div class="axe-text">
+            Estime de soi réaliste, communication, auto-promotion, compétences sociales, positionnement.
+          </div>
+
+          <!-- Estime de soi réaliste -->
+          <div class="skill-item" onclick="event.stopPropagation(); toggleSkill(this)">
+            <div class="skill-header">
+              <div>
+                <div class="skill-title">Estime de soi réaliste</div>
+                <div class="skill-meta">Se voir ni trop haut, ni trop bas</div>
+              </div>
+              <span class="skill-toggle">▼</span>
+            </div>
+            <div class="skill-details">
+              <div class="skill-section-title">Sous-compétences</div>
+              <div class="skill-description">Reconnaître ses réussites, même modestes.</div>
+              <div class="skill-description">Accepter d’avoir des limites sans se résumer à elles.</div>
+              <div class="skill-description">
+                Sortir du « je suis nul / je suis fort » pour aller vers « je progresse ».
+              </div>
+
+              <div class="skill-section-title">Exemples d’activités LS4YOU associées</div>
+              <span class="activity-tag">Moi à mon meilleur</span>
+              <span class="activity-tag">Forces & défis</span>
+            </div>
+          </div>
+
+          <!-- Communication & expression -->
+          <div class="skill-item" onclick="event.stopPropagation(); toggleSkill(this)">
+            <div class="skill-header">
+              <div>
+                <div class="skill-title">Communication &amp; expression</div>
+                <div class="skill-meta">Faire passer un message, exprimer un besoin</div>
+              </div>
+              <span class="skill-toggle">▼</span>
+            </div>
+            <div class="skill-details">
+              <div class="skill-section-title">Sous-compétences</div>
+              <div class="skill-description">
+                Exprimer une idée, un besoin, un désaccord sans agressivité.
+              </div>
+              <div class="skill-description">
+                Adapter son langage selon l’interlocuteur (ami, conseiller, employeur).
+              </div>
+              <div class="skill-description">
+                Poser des questions, reformuler, vérifier qu’on a compris.
+              </div>
+
+              <div class="skill-section-title">Exemples d’activités LS4YOU associées</div>
+              <span class="activity-tag">Montrez le meilleur de vous-même (pitch vidéo)</span>
+              <span class="activity-tag">Recevoir du feedback / Image de soi</span>
+            </div>
+          </div>
+
+          <!-- Auto-promotion / personal branding -->
+          <div class="skill-item" onclick="event.stopPropagation(); toggleSkill(this)">
+            <div class="skill-header">
+              <div>
+                <div class="skill-title">Auto-promotion / personal branding</div>
+                <div class="skill-meta">Transformer ses expériences en ressources</div>
+              </div>
+              <span class="skill-toggle">▼</span>
+            </div>
+            <div class="skill-details">
+              <div class="skill-section-title">Sous-compétences</div>
+              <div class="skill-description">
+                Faire le lien entre ses expériences (loisirs, famille, galères) et des compétences.
+              </div>
+              <div class="skill-description">Raconter son parcours de façon cohérente, sans honte.</div>
+              <div class="skill-description">
+                Défendre sa candidature, expliquer en quoi on est utile pour un projet / employeur.
+              </div>
+
+              <div class="skill-section-title">Exemples d’activités LS4YOU associées</div>
+              <span class="activity-tag">Image de marque personnelle</span>
+              <span class="activity-tag">Concevoir mon magazine (Zine)</span>
+            </div>
+          </div>
+
+          <!-- Compétences sociales -->
+          <div class="skill-item" onclick="event.stopPropagation(); toggleSkill(this)">
+            <div class="skill-header">
+              <div>
+                <div class="skill-title">Compétences sociales</div>
+                <div class="skill-meta">Coopérer, gérer les désaccords</div>
+              </div>
+              <span class="skill-toggle">▼</span>
+            </div>
+            <div class="skill-details">
+              <div class="skill-section-title">Sous-compétences</div>
+              <div class="skill-description">Coopérer dans un groupe, partager des tâches.</div>
+              <div class="skill-description">
+                Repérer les signaux sociaux (ironie, malaise, limites des autres).
+              </div>
+              <div class="skill-description">
+                Gérer des désaccords de base sans fuir ni exploser.
+              </div>
+
+              <div class="skill-section-title">Exemples d’activités LS4YOU associées</div>
+              <span class="activity-tag">Exercice de négociation</span>
+              <span class="activity-tag">(Jeu citoyen / débat encadré – à créer)</span>
+            </div>
+          </div>
+
+          <!-- Positionnement / affirmation de soi -->
+          <div class="skill-item" onclick="event.stopPropagation(); toggleSkill(this)">
+            <div class="skill-header">
+              <div>
+                <div class="skill-title">Positionnement / affirmation de soi</div>
+                <div class="skill-meta">Dire oui / non, poser ses limites</div>
+              </div>
+              <span class="skill-toggle">▼</span>
+            </div>
+            <div class="skill-details">
+              <div class="skill-section-title">Sous-compétences</div>
+              <div class="skill-description">Dire « oui » quand on veut, « non » quand ce n’est pas possible.</div>
+              <div class="skill-description">Faire respecter ses limites (horaires, disponibilité, respect).</div>
+              <div class="skill-description">
+                Se sentir légitime à poser des questions, à demander des explications.
+              </div>
+
+              <div class="skill-section-title">Exemples d’activités LS4YOU associées</div>
+              <span class="activity-tag">Portfolio de démarcation (limites)</span>
+              <span class="activity-tag">Recevoir du feedback / posture</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <h3 class="summary-item-title">VALORISATION DE SOI</h3>
-      <p class="summary-finalite"><strong>Finalité :</strong> Être capable de se présenter, de prendre sa place, de transformer ce que je fais en ressources.</p>
-     </div>
-     <div class="summary-item item-3">
-      <div class="summary-number">
-       Axe 3
+
+      <!-- AXE 3 : BIEN-ÊTRE PHYSIQUE & MENTAL -->
+      <div class="axe-card axe-3" onclick="toggleAxe(this)">
+        <div class="axe-header">
+          <div class="axe-number">Axe 3</div>
+          <div class="axe-title">BIEN-ÊTRE PHYSIQUE &amp; MENTAL</div>
+          <div class="axe-finalite">
+            <strong>Finalité :</strong> disposer d’un minimum de stabilité intérieure et d’énergie pour pouvoir se projeter et agir.
+          </div>
+          <div class="axe-meta">
+            Entrées ML : santé mentale, TCA, phobie, stress, décrochage, épuisement.
+          </div>
+          <div style="text-align: center;">
+            <span class="expand-icon">▼</span>
+          </div>
+        </div>
+
+        <div class="axe-content">
+          <div class="axe-subtitle">Compétences-clés Life Skills</div>
+          <div class="axe-text">
+            Hygiène de vie, gestion du stress, résilience, sécurité intérieure.
+          </div>
+
+          <!-- Hygiène de vie & énergie -->
+          <div class="skill-item" onclick="event.stopPropagation(); toggleSkill(this)">
+            <div class="skill-header">
+              <div>
+                <div class="skill-title">Hygiène de vie &amp; énergie</div>
+                <div class="skill-meta">Sommeil, alimentation, activité physique</div>
+              </div>
+              <span class="skill-toggle">▼</span>
+            </div>
+            <div class="skill-details">
+              <div class="skill-section-title">Sous-compétences</div>
+              <div class="skill-description">
+                Repérer ce qui épuise / ce qui ressource (écrans, sorties, sport, temps calme).
+              </div>
+              <div class="skill-description">
+                Ajuster 1–2 habitudes pour retrouver un peu d’énergie (heure de coucher, pauses…).
+              </div>
+
+              <div class="skill-section-title">Exemples d’activités LS4YOU associées</div>
+              <span class="activity-tag">Mon mode de vie – bilan & actions</span>
+              <span class="activity-tag">Carte du quotidien (à créer)</span>
+            </div>
+          </div>
+
+          <!-- Gestion du stress & émotions -->
+          <div class="skill-item" onclick="event.stopPropagation(); toggleSkill(this)">
+            <div class="skill-header">
+              <div>
+                <div class="skill-title">Gestion du stress &amp; des émotions</div>
+                <div class="skill-meta">Lire son tableau de bord intérieur</div>
+              </div>
+              <span class="skill-toggle">▼</span>
+            </div>
+            <div class="skill-details">
+              <div class="skill-section-title">Sous-compétences</div>
+              <div class="skill-description">
+                Repérer ses signaux de stress (corps, pensées, comportements).
+              </div>
+              <div class="skill-description">
+                Utiliser 1–2 techniques simples (respiration, pauses, activité ressource).
+              </div>
+              <div class="skill-description">
+                Ne pas laisser le stress tout envahir (crise, abandon, explosion).
+              </div>
+
+              <div class="skill-section-title">Exemples d’activités LS4YOU associées</div>
+              <span class="activity-tag">Stressomètre</span>
+              <span class="activity-tag">Roue des émotions</span>
+            </div>
+          </div>
+
+          <!-- Résilience & coping -->
+          <div class="skill-item" onclick="event.stopPropagation(); toggleSkill(this)">
+            <div class="skill-header">
+              <div>
+                <div class="skill-title">Résilience &amp; coping</div>
+                <div class="skill-meta">Faire face, rebondir</div>
+              </div>
+              <span class="skill-toggle">▼</span>
+            </div>
+            <div class="skill-details">
+              <div class="skill-section-title">Sous-compétences</div>
+              <div class="skill-description">
+                Traverser une difficulté (refus, rupture, conflit) sans tout arrêter.
+              </div>
+              <div class="skill-description">
+                Demander du soutien plutôt que tout garder pour soi.
+              </div>
+              <div class="skill-description">
+                Repartir étape par étape après un choc ou une mauvaise nouvelle.
+              </div>
+
+              <div class="skill-section-title">Exemples d’activités LS4YOU associées</div>
+              <span class="activity-tag">Arbre de la résilience</span>
+            </div>
+          </div>
+
+          <!-- Sécurité intérieure -->
+          <div class="skill-item" onclick="event.stopPropagation(); toggleSkill(this)">
+            <div class="skill-header">
+              <div>
+                <div class="skill-title">Sécurité intérieure</div>
+                <div class="skill-meta">Sentiment d’être suffisamment en sécurité</div>
+              </div>
+              <span class="skill-toggle">▼</span>
+            </div>
+            <div class="skill-details">
+              <div class="skill-section-title">Sous-compétences</div>
+              <div class="skill-description">
+                Se sentir « suffisamment en sécurité » quelque part (personnes, lieux, routines).
+              </div>
+              <div class="skill-description">
+                S’autoriser à être accompagné sans se sentir jugé ou « faible ».
+              </div>
+              <div class="skill-description">
+                Avoir 1–2 repères stables (personnes ou activités) qui servent de base.
+              </div>
+
+              <div class="skill-section-title">Exemples d’activités LS4YOU associées</div>
+              <span class="activity-tag">Mon réseau de soutien</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <h3 class="summary-item-title">BIEN-ÊTRE PHYSIQUE &amp; MENTAL</h3>
-      <p class="summary-finalite"><strong>Finalité :</strong> disposer d'un minimum de stabilité intérieure et d'énergie pour pouvoir se projeter et agir.</p>
-     </div>
-     <div class="summary-item item-4">
-      <div class="summary-number">
-       Axe 4
+
+      <!-- AXE 4 : RESSOURCES MATÉRIELLES & FINANCIÈRES -->
+      <div class="axe-card axe-4" onclick="toggleAxe(this)">
+        <div class="axe-header">
+          <div class="axe-number">Axe 4</div>
+          <div class="axe-title">RESSOURCES MATÉRIELLES &amp; FINANCIÈRES</div>
+          <div class="axe-finalite">
+            <strong>Finalité :</strong> savoir mobiliser et organiser les ressources concrètes qui permettent d’agir dans la vraie vie.
+          </div>
+          <div class="axe-meta">
+            Entrées ML : budget, logement, mobilité, droits, numérique, organisation du quotidien.
+          </div>
+          <div style="text-align: center;">
+            <span class="expand-icon">▼</span>
+          </div>
+        </div>
+
+        <div class="axe-content">
+          <div class="axe-subtitle">Compétences-clés Life Skills</div>
+          <div class="axe-text">
+            Gestion de l’argent, logement & cadre de vie, mobilité, accès aux droits, équipement & numérique.
+          </div>
+
+          <!-- Gestion de l'argent & du budget -->
+          <div class="skill-item" onclick="event.stopPropagation(); toggleSkill(this)">
+            <div class="skill-header">
+              <div>
+                <div class="skill-title">Gestion de l’argent &amp; du budget</div>
+                <div class="skill-meta">Piloter ses ressources plutôt que les subir</div>
+              </div>
+              <span class="skill-toggle">▼</span>
+            </div>
+            <div class="skill-details">
+              <div class="skill-section-title">Sous-compétences</div>
+              <div class="skill-description">
+                Comprendre entrées / sorties, repérer une situation à risque (découvert, dettes, impayés).
+              </div>
+              <div class="skill-description">
+                Faire des arbitrages (priorités essentielles vs secondaires).
+              </div>
+              <div class="skill-description">
+                Anticiper plutôt que subir (prévoir les dépenses liées à un projet).
+              </div>
+
+              <div class="skill-section-title">Exemples d’activités LS4YOU associées</div>
+              <span class="activity-tag">Du chèque de paie à la poche</span>
+              <span class="activity-tag">Littératie financière (cas / profils)</span>
+              <span class="activity-tag">Vraie vie, vrais défis – budget</span>
+            </div>
+          </div>
+
+          <!-- Logement & cadre de vie -->
+          <div class="skill-item" onclick="event.stopPropagation(); toggleSkill(this)">
+            <div class="skill-header">
+              <div>
+                <div class="skill-title">Logement &amp; cadre de vie</div>
+                <div class="skill-meta">Se sécuriser et se projeter dans un lieu</div>
+              </div>
+              <span class="skill-toggle">▼</span>
+            </div>
+            <div class="skill-details">
+              <div class="skill-section-title">Sous-compétences</div>
+              <div class="skill-description">
+                Comprendre ce qui est sécurisant / insécurisant pour soi.
+              </div>
+              <div class="skill-description">
+                Identifier les solutions envisageables (hébergement, foyer, logement social…).
+              </div>
+              <div class="skill-description">
+                Gérer le quotidien (charges, ménage, cohabitation).
+              </div>
+
+              <div class="skill-section-title">Exemples d’activités LS4YOU associées</div>
+              <span class="activity-tag">Budget logement – rêver pour planifier</span>
+              <span class="activity-tag">(Mindmap logement – à créer)</span>
+            </div>
+          </div>
+
+          <!-- Mobilité & accès aux lieux -->
+          <div class="skill-item" onclick="event.stopPropagation(); toggleSkill(this)">
+            <div class="skill-header">
+              <div>
+                <div class="skill-title">Mobilité &amp; accès aux lieux</div>
+                <div class="skill-meta">Pouvoir aller là où les projets se jouent</div>
+              </div>
+              <span class="skill-toggle">▼</span>
+            </div>
+            <div class="skill-details">
+              <div class="skill-section-title">Sous-compétences</div>
+              <div class="skill-description">
+                Planifier un trajet, anticiper les aléas.
+              </div>
+              <div class="skill-description">
+                Identifier plusieurs options (bus, vélo, covoiturage, accompagnement…).
+              </div>
+              <div class="skill-description">
+                Intégrer le coût et le temps dans ses choix de projet.
+              </div>
+
+              <div class="skill-section-title">Exemples d’activités LS4YOU associées</div>
+              <span class="activity-tag">Vraie vie, vrais défis – mobilité</span>
+              <span class="activity-tag">Mindmap mobilité (à créer)</span>
+            </div>
+          </div>
+
+          <!-- Accès aux droits & démarches -->
+          <div class="skill-item" onclick="event.stopPropagation(); toggleSkill(this)">
+            <div class="skill-header">
+              <div>
+                <div class="skill-title">Accès aux droits &amp; démarches</div>
+                <div class="skill-meta">Ne pas rester seul face aux papiers</div>
+              </div>
+              <span class="skill-toggle">▼</span>
+            </div>
+            <div class="skill-details">
+              <div class="skill-section-title">Sous-compétences</div>
+              <div class="skill-description">
+                Savoir qu’il existe des droits (santé, formation, revenu, logement…).
+              </div>
+              <div class="skill-description">
+                Identifier qui peut aider à faire une démarche.
+              </div>
+              <div class="skill-description">
+                Suivre une démarche dans la durée (rendez-vous, pièces, relances).
+              </div>
+
+              <div class="skill-section-title">Exemples d’activités LS4YOU associées</div>
+              <span class="activity-tag">(Parcours démarches en ligne – à créer)</span>
+            </div>
+          </div>
+
+          <!-- Équipement & numérique -->
+          <div class="skill-item" onclick="event.stopPropagation(); toggleSkill(this)">
+            <div class="skill-header">
+              <div>
+                <div class="skill-title">Équipement &amp; numérique</div>
+                <div class="skill-meta">Avoir les bons outils pour agir</div>
+              </div>
+              <span class="skill-toggle">▼</span>
+            </div>
+            <div class="skill-details">
+              <div class="skill-section-title">Sous-compétences</div>
+              <div class="skill-description">
+                Disposer d’un minimum d’outils (téléphone, connexion, papiers).
+              </div>
+              <div class="skill-description">
+                Savoir où aller quand il manque quelque chose (ML, CCAS, tiers-lieu…).
+              </div>
+              <div class="skill-description">
+                Utiliser le numérique pour se débrouiller (RDV, dossiers, infos).
+              </div>
+
+              <div class="skill-section-title">Exemples d’activités LS4YOU associées</div>
+              <span class="activity-tag">Identité numérique professionnelle</span>
+              <span class="activity-tag">(Parcours inclusion numérique – à créer)</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <h3 class="summary-item-title">RESSOURCES MATÉRIELLES &amp; FINANCIÈRES</h3>
-      <p class="summary-finalite"><strong>Finalité :</strong> savoir mobiliser et organiser les ressources concrètes qui permettent d'agir dans la vraie vie. <strong>4 outils pédagogiques</strong></p>
-     </div>
-    </div>
-   </div><!-- Bloc englobant les 4 axes -->
-   <div class="axes-wrapper">
-    <div class="axes-wrapper-header">
-     <h2 class="axes-wrapper-title">🎯 Détail des 4 Axes Life Skills</h2>
-     <p class="axes-wrapper-subtitle">Cliquez sur chaque axe pour découvrir ses sous-familles de compétences</p>
-    </div>
-    <div class="axes-grid"><!-- AXE 1 -->
-     <div class="axe-card axe-1" onclick="toggleAxe(this)">
-      <div class="axe-header">
-       <div class="axe-number">
-        Axe 1
-       </div>
-       <div class="axe-title">
-        PERSONNALITÉ
-       </div>
-       <div class="axe-finalite"><strong>Finalité :</strong> savoir qui je suis, ce que je veux, comment je fonctionne, et comment je décide.
-       </div>
-       <div style="text-align: center;"><span class="expand-icon">▼</span>
-       </div>
-      </div>
-      <div class="axe-content"><!-- Outil 1: Test des 16 personnalités (MBTI) -->
-       <div class="tool-card" onclick="event.stopPropagation(); toggleTool(this)">
-        <div class="tool-header">
-         <div class="tool-icon">
-          🧠
-         </div>
-         <div class="tool-title">
-          Test des 16 personnalités (MBTI)
-         </div><span class="tool-toggle">▼</span>
-        </div>
-        <div class="tool-content">
-         <div class="tool-section">
-          <h4 class="tool-section-title">💡 Compétences Life Skills travaillées</h4>
-          <div class="skill-description">
-           Connaissance de soi approfondie : préférences cognitives (E/I, S/N, T/F, J/P), modes de décision, manière de gérer l'information.
-          </div>
-          <div class="skill-description">
-           Décodage de ses réactions : comprendre pourquoi certaines situations fatiguent / stimulent.
-          </div>
-          <div class="skill-description">
-           Acceptation de soi : sortir du "je suis nul / anormal" pour "j'ai un fonctionnement spécifique".
-          </div>
-          <div class="skill-description">
-           Lecture des autres : début d'empathie structurée (les autres ne fonctionnent pas comme moi).
-          </div>
-          <div class="skill-description">
-           Métacognition : capacité à parler de son propre fonctionnement (« je suis plutôt… donc j'ai besoin de… »).
-          </div>
-         </div>
-         <div class="tool-section">
-          <h4 class="tool-section-title">🎯 Déclinaison dans les 11 thèmes Mission Locale</h4>
-          <div class="theme-grid">
-           <div class="theme-item"><strong>Emploi</strong>
-            <p>Aide à cibler des environnements compatibles (collectif / autonomie, tâches concrètes ou abstraites).</p>
-           </div>
-           <div class="theme-item"><strong>Formation</strong>
-            <p>Repérage du mode d'apprentissage (structuré vs flexible, individuel vs groupe).</p>
-           </div>
-           <div class="theme-item"><strong>Orientation</strong>
-            <p>Sert de base à la discussion sur "dans quel type d'activité je me projette".</p>
-           </div>
-           <div class="theme-item"><strong>Mobilité</strong>
-            <p>Comprendre son rapport au changement, à l'inconnu, à la planification des déplacements.</p>
-           </div>
-           <div class="theme-item"><strong>Santé</strong>
-            <p>Repérer les situations qui surchargent (bruit, foule, imprévus) et les besoins de récupération.</p>
-           </div>
-           <div class="theme-item"><strong>Logement</strong>
-            <p>Identifier si on a besoin de calme / colocation / cadre structuré, etc.</p>
-           </div>
-           <div class="theme-item"><strong>Citoyenneté / relations</strong>
-            <p>Décoder ses modes de communication, conflits fréquents, manières de dire les choses.</p>
-           </div>
-           <div class="theme-item"><strong>Finances</strong>
-            <p>Comprendre sa tendance a planifier ou non (profil plus "J" ou plus "P" par ex.).</p>
-           </div>
-           <div class="theme-item"><strong>Loisirs / sport / culture</strong>
-            <p>Choisir des activités ressources alignées avec son type (créatif, structuré, collectif, etc.).</p>
-           </div>
-           <div class="theme-item"><strong>Numérique</strong>
-            <p>Réfléchir à la façon dont on s'expose ou non en ligne, et à sa tolérance à la stimulation numérique.</p>
-           </div>
-           <div class="theme-item"><strong>Mode de vie</strong>
-            <p>Construire un quotidien adapté (besoin de routines vs besoin de variété).</p>
-           </div>
-          </div>
-         </div>
-        </div>
-       </div><!-- Outil 2: Forces et défis -->
-       <div class="tool-card" onclick="event.stopPropagation(); toggleTool(this)">
-        <div class="tool-header">
-         <div class="tool-icon">
-          💪
-         </div>
-         <div class="tool-title">
-          Forces et défis
-         </div><span class="tool-toggle">▼</span>
-        </div>
-        <div class="tool-content">
-         <div class="tool-section">
-          <h4 class="tool-section-title">💡 Compétences Life Skills travaillées</h4>
-          <div class="skill-description">
-           Identification des forces : repérer ce pour quoi on est doué, ce que les autres apprécient.
-          </div>
-          <div class="skill-description">
-           Nommer ses défis : distinguer "je suis nul" de "j'ai un point à développer".
-          </div>
-          <div class="skill-description">
-           Demande de soutien : "qui / quoi pourrait m'aider à m'améliorer ?".
-          </div>
-          <div class="skill-description">
-           Auto-évaluation réaliste : ni survalorisation ni dévalorisation globale.
-          </div>
-          <div class="skill-description">
-           Planification micro-progres : 1 axe a ameliorer, une premiere marche possible.
-          </div>
-         </div>
-         <div class="tool-section">
-          <h4 class="tool-section-title">🎯 Déclinaison dans les 11 thèmes Mission Locale</h4>
-          <div class="theme-grid">
-           <div class="theme-item"><strong>Emploi</strong>
-            <p>Alimente le discours de compétences pour CV / entretien et repère les fragilités à sécuriser.</p>
-           </div>
-           <div class="theme-item"><strong>Formation</strong>
-            <p>Aide à travailler la posture face à l'évaluation et à cibler les compétences scolaires / transversales à renforcer.</p>
-           </div>
-           <div class="theme-item"><strong>Orientation</strong>
-            <p>Relie forces / défis à des pistes de projet réalistes.</p>
-           </div>
-           <div class="theme-item"><strong>Mobilité</strong>
-            <p>Identifie si l'autonomie de déplacement est un point fort ou un défi à travailler.</p>
-           </div>
-           <div class="theme-item"><strong>Santé</strong>
-            <p>Repère les défis liés à la gestion du stress, des émotions, de l'énergie.</p>
-           </div>
-           <div class="theme-item"><strong>Logement</strong>
-            <p>Se positionner sur "ce que je supporte / ce qui n'est plus supportable" dans le lieu de vie.</p>
-           </div>
-           <div class="theme-item"><strong>Citoyenneté / relations</strong>
-            <p>Forces en communication, coopération, empathie vs difficultés de conflit, prise de parole.</p>
-           </div>
-           <div class="theme-item"><strong>Finances</strong>
-            <p>Forces / défis dans la gestion d'argent (organisation, impulsivité, anticipation).</p>
-           </div>
-           <div class="theme-item"><strong>Loisirs</strong>
-            <p>Met en lumière des talents cachés via hobbies (créativité, persévérance, esprit d'équipe…).</p>
-           </div>
-           <div class="theme-item"><strong>Numérique</strong>
-            <p>Forces dans l'usage (recherche, démarches) vs défis (impulsivité, sur-connexion).</p>
-           </div>
-           <div class="theme-item"><strong>Mode de vie</strong>
-            <p>Identifier ce qui aide (routine, sport) et ce qui fragilise (sommeil, écrans tardifs…).</p>
-           </div>
-          </div>
-         </div>
-        </div>
-       </div><!-- Outil 3: Besoins, valeurs, objectifs de vie -->
-       <div class="tool-card" onclick="event.stopPropagation(); toggleTool(this)">
-        <div class="tool-header">
-         <div class="tool-icon">
-          🎯
-         </div>
-         <div class="tool-title">
-          Besoins, valeurs, objectifs de vie
-         </div><span class="tool-toggle">▼</span>
-        </div>
-        <div class="tool-content">
-         <div class="tool-section">
-          <h4 class="tool-section-title">💡 Compétences Life Skills travaillées</h4>
-          <div class="skill-description">
-           Clarification des valeurs : ce qui est non négociable pour le jeune (respect, liberté, famille…).
-          </div>
-          <div class="skill-description">
-           Repérage des besoins essentiels : ce qui est nécessaire pour se sentir bien (soutien, temps seul, stabilité…).
-          </div>
-          <div class="skill-description">
-           Projection temporelle : schema 1 / 5 / 10 ans → capacité à se projeter un minimum.
-          </div>
-          <div class="skill-description">
-           Alignement valeurs / habitudes : identifier les incohérences et les petits ajustements possibles.
-          </div>
-          <div class="skill-description">
-           Priorisation : hiérarchiser ce qui compte vraiment dans les choix futurs.
-          </div>
-         </div>
-         <div class="tool-section">
-          <h4 class="tool-section-title">🎯 Déclinaison dans les 11 thèmes Mission Locale</h4>
-          <div class="theme-grid">
-           <div class="theme-item"><strong>Emploi</strong>
-            <p>Choisir un emploi compatible avec ses valeurs (ex : utilité sociale, équilibre vie pro / perso).</p>
-           </div>
-           <div class="theme-item"><strong>Formation</strong>
-            <p>Accepter de s'engager dans un cursus qui sert ses objectifs, pas seulement "occuper le temps".</p>
-           </div>
-           <div class="theme-item"><strong>Orientation</strong>
-            <p>Donner du sens au projet : "qu'est-ce que je veux construire pour moi ?".</p>
-           </div>
-           <div class="theme-item"><strong>Mobilité</strong>
-            <p>Décider s'il est acceptable de bouger (géographiquement) selon ses valeurs / besoins.</p>
-           </div>
-           <div class="theme-item"><strong>Santé</strong>
-            <p>Inscrire la santé comme valeur (ou non) et intégrer des objectifs de protection dans le projet de vie.</p>
-           </div>
-           <div class="theme-item"><strong>Logement</strong>
-            <p>Définir ce qu'est un logement "digne" au regard de ses valeurs.</p>
-           </div>
-           <div class="theme-item"><strong>Citoyenneté / relations</strong>
-            <p>Se positionner sur la participation, l'engagement, la solidarité.</p>
-           </div>
-           <div class="theme-item"><strong>Finances</strong>
-            <p>Arbitrer dépenses / projets en fonction des priorités de vie.</p>
-           </div>
-           <div class="theme-item"><strong>Loisirs</strong>
-            <p>Légitimer les loisirs comme besoins (ressources) plutôt que "perte de temps".</p>
-           </div>
-           <div class="theme-item"><strong>Numérique</strong>
-            <p>Clarifier sa relation aux écrans et à l'image de soi en ligne selon ses valeurs.</p>
-           </div>
-           <div class="theme-item"><strong>Mode de vie</strong>
-            <p>Construire un mode de vie cohérent avec "qui je veux être" au quotidien.</p>
-           </div>
-          </div>
-         </div>
-        </div>
-       </div><!-- Outil 4: Explications par mindmapping « Faites le point » -->
-       <div class="tool-card" onclick="event.stopPropagation(); toggleTool(this)">
-        <div class="tool-header">
-         <div class="tool-icon">
-          🗺️
-         </div>
-         <div class="tool-title">
-          Explications par mindmapping « Faites le point »
-         </div><span class="tool-toggle">▼</span>
-        </div>
-        <div class="tool-content">
-         <div class="tool-section">
-          <h4 class="tool-section-title">💡 Compétences Life Skills travaillées</h4>
-          <div class="skill-description">
-           Vision globale de situation : cartographier les différentes dimensions de sa vie.
-          </div>
-          <div class="skill-description">
-           Repérage des ressources / obstacles : personnes, lieux, dispositifs, freins.
-          </div>
-          <div class="skill-description">
-           Structuration de la pensée : passer du flou à une représentation organisée.
-          </div>
-          <div class="skill-description">
-           Capacité d'analyse : distinguer ce qui dépend de soi / ne dépend pas de soi.
-          </div>
-          <div class="skill-description">
-           Prise de décision : à partir de la carte, prioriser un ou deux axes d'action.
-          </div>
-         </div>
-         <div class="tool-section">
-          <h4 class="tool-section-title">🎯 Déclinaison dans les 11 thèmes Mission Locale</h4>
-          <div class="theme-grid">
-           <div class="theme-item"><strong>Emploi</strong>
-            <p>Situer l'emploi parmi d'autres enjeux (santé, logement, mobilité…) et prioriser.</p>
-           </div>
-           <div class="theme-item"><strong>Formation</strong>
-            <p>Visualiser où la formation se place dans la trajectoire globale.</p>
-           </div>
-           <div class="theme-item"><strong>Orientation</strong>
-            <p>Cartographier les influences, envies, contraintes sur le projet.</p>
-           </div>
-           <div class="theme-item"><strong>Mobilité</strong>
-            <p>Intégrer clairement la question des déplacements comme ressource / frein.</p>
-           </div>
-           <div class="theme-item"><strong>Santé</strong>
-            <p>Faire apparaître les liens entre état de santé et autres domaines (emploi, rythme…).</p>
-           </div>
-           <div class="theme-item"><strong>Logement</strong>
-            <p>Poser visuellement l'impact du logement sur le reste.</p>
-           </div>
-           <div class="theme-item"><strong>Citoyenneté / relations</strong>
-            <p>Lister les personnes / réseaux ressources ou problématiques.</p>
-           </div>
-           <div class="theme-item"><strong>Finances</strong>
-            <p>Visualiser la dimension financière parmi les autres facteurs.</p>
-           </div>
-           <div class="theme-item"><strong>Loisirs</strong>
-            <p>Identifier les activités ressources qui soutiennent le reste.</p>
-           </div>
-           <div class="theme-item"><strong>Numérique</strong>
-            <p>Cartographier ses usages (utile / nuisible).</p>
-           </div>
-           <div class="theme-item"><strong>Mode de vie</strong>
-            <p>Représenter ses habitudes quotidiennes comme un système.</p>
-           </div>
-          </div>
-         </div>
-        </div>
-       </div><!-- Outil 5: Recevoir du feedback / Image de soi vs perception externe -->
-       <div class="tool-card" onclick="event.stopPropagation(); toggleTool(this)">
-        <div class="tool-header">
-         <div class="tool-icon">
-          👁️
-         </div>
-         <div class="tool-title">
-          Recevoir du feedback / Image de soi vs perception externe
-         </div><span class="tool-toggle">▼</span>
-        </div>
-        <div class="tool-content">
-         <div class="tool-section">
-          <h4 class="tool-section-title">💡 Compétences Life Skills travaillées</h4>
-          <div class="skill-description">
-           Ouverture au feedback : supporter un retour sans se sentir détruit.
-          </div>
-          <div class="skill-description">
-           Différenciation soi / regard des autres : ce que les autres perçoivent n'est pas "toute la vérité".
-          </div>
-          <div class="skill-description">
-           Communication assertive : pouvoir expliquer ce qu'on voulait montrer / faire.
-          </div>
-          <div class="skill-description">
-           Régulation émotionnelle face à la critique.
-          </div>
-          <div class="skill-description">
-           Ajustement de sa présentation (tenue, langage, posture) si besoin.
-          </div>
-         </div>
-         <div class="tool-section">
-          <h4 class="tool-section-title">🎯 Déclinaison dans les 11 thèmes Mission Locale</h4>
-          <div class="theme-grid">
-           <div class="theme-item"><strong>Emploi</strong>
-            <p>Indispensable pour progresser en stage / emploi et tenir la période d'essai.</p>
-           </div>
-           <div class="theme-item"><strong>Formation</strong>
-            <p>Accepter les remarques des formateurs, ajuster ses méthodes de travail.</p>
-           </div>
-           <div class="theme-item"><strong>Orientation</strong>
-            <p>Intégrer le feedback sur la faisabilité d'un projet sans l'abandonner complètement.</p>
-           </div>
-           <div class="theme-item"><strong>Mobilité</strong>
-            <p>Entendre les retours sur ponctualité / organisation de trajets.</p>
-           </div>
-           <div class="theme-item"><strong>Santé</strong>
-            <p>Distinguer jugement toxique vs feedback utile pour se protéger.</p>
-           </div>
-           <div class="theme-item"><strong>Logement</strong>
-            <p>Accepter des remarques sur comportement en coloc / foyer.</p>
-           </div>
-           <div class="theme-item"><strong>Citoyenneté / relations</strong>
-            <p>Gérer les conflits et désaccords sans rupture définitive.</p>
-           </div>
-           <div class="theme-item"><strong>Finances</strong>
-            <p>Entendre les alertes des pros (assistant social, banquier) sur les risques.</p>
-           </div>
-           <div class="theme-item"><strong>Loisirs</strong>
-            <p>Utiliser les retours (coach, équipe, public) pour progresser.</p>
-           </div>
-           <div class="theme-item"><strong>Numérique</strong>
-            <p>Gérer les commentaires en ligne, différencier critique / cyberharcèlement.</p>
-           </div>
-           <div class="theme-item"><strong>Mode de vie</strong>
-            <p>Prendre en compte les retours (sommeil, hygiène, horaires) dans un cadre bienveillant.</p>
-           </div>
-          </div>
-         </div>
-        </div>
-       </div>
-      </div>
-     </div><!-- AXE 2 -->
-     <div class="axe-card axe-2" onclick="toggleAxe(this)">
-      <div class="axe-header">
-       <div class="axe-number">
-        Axe 2
-       </div>
-       <div class="axe-title">
-        VALORISATION DE SOI
-       </div>
-       <div class="axe-finalite"><strong>Finalité :</strong> Être capable de se présenter, de prendre sa place, de transformer ce que je fais en ressources.
-       </div>
-       <div style="text-align: center;"><span class="expand-icon">▼</span>
-       </div>
-      </div>
-      <div class="axe-content"><!-- Outil 6: Moi à mon meilleur -->
-       <div class="tool-card" onclick="event.stopPropagation(); toggleTool(this)">
-        <div class="tool-header">
-         <div class="tool-icon">
-          ✨
-         </div>
-         <div class="tool-title">
-          Moi à mon meilleur (récit d'un moment où je me suis senti bien)
-         </div><span class="tool-toggle">▼</span>
-        </div>
-        <div class="tool-content">
-         <div class="tool-section">
-          <h4 class="tool-section-title">💡 Compétences Life Skills travaillées</h4>
-          <div class="skill-description">
-           Narration de soi : raconter une histoire personnelle structurée.
-          </div>
-          <div class="skill-description">
-           Repérage des forces dans le récit : intérêts, compétences, valeurs.
-          </div>
-          <div class="skill-description">
-           Écoute active &amp; feedback entre pairs.
-          </div>
-          <div class="skill-description">
-           Auto-estime : se voir à travers le regard positif des autres.
-          </div>
-          <div class="skill-description">
-           Capacité à tirer des apprentissages d'une expérience.
-          </div>
-         </div>
-         <div class="tool-section">
-          <h4 class="tool-section-title">🎯 Déclinaison dans les 11 thèmes Mission Locale</h4>
-          <div class="theme-grid">
-           <div class="theme-item"><strong>Emploi</strong>
-            <p>Prépare les réponses "parlez-moi de vous", "une réussite dont vous êtes fier".</p>
-           </div>
-           <div class="theme-item"><strong>Formation</strong>
-            <p>Sert de base pour parler de réussites scolaires / extra-scolaires.</p>
-           </div>
-           <div class="theme-item"><strong>Orientation</strong>
-            <p>Met en lumière des pistes de projet cohérentes avec ce qui le fait se sentir "à son meilleur".</p>
-           </div>
-           <div class="theme-item"><strong>Mobilité</strong>
-            <p>Peut ancrer une expérience positive de déplacement ou de mobilité.</p>
-           </div>
-           <div class="theme-item"><strong>Santé</strong>
-            <p>Renforce la perception de ses capacités à faire face, même en difficultés.</p>
-           </div>
-           <div class="theme-item"><strong>Logement</strong>
-            <p>Met parfois en avant des expériences de stabilité / soutien à relier à la question logement.</p>
-           </div>
-           <div class="theme-item"><strong>Citoyenneté / relations</strong>
-            <p>Valorise des engagements, gestes de solidarité, coopération.</p>
-           </div>
-           <div class="theme-item"><strong>Finances</strong>
-            <p>Peut intégrer des épisodes de gestion responsable (économie, projet).</p>
-           </div>
-           <div class="theme-item"><strong>Loisirs</strong>
-            <p>Très lié aux passions / activités ressources.</p>
-           </div>
-           <div class="theme-item"><strong>Numérique</strong>
-            <p>Peut servir à revisiter ses "meilleurs moments" en ligne ou IRL et à les distinguer.</p>
-           </div>
-           <div class="theme-item"><strong>Mode de vie</strong>
-            <p>Donne des indices de conditions de vie dans lesquelles le jeune fonctionne bien.</p>
-           </div>
-          </div>
-         </div>
-        </div>
-       </div><!-- Outil 7: Montrez le meilleur de vous-meme -->
-       <div class="tool-card" onclick="event.stopPropagation(); toggleTool(this)">
-        <div class="tool-header">
-         <div class="tool-icon">
-          🎥
-         </div>
-         <div class="tool-title">
-          Montrez le meilleur de vous-même (pitch personnel vidéo)
-         </div><span class="tool-toggle">▼</span>
-        </div>
-        <div class="tool-content">
-         <div class="tool-section">
-          <h4 class="tool-section-title">💡 Compétences Life Skills travaillées</h4>
-          <div class="skill-description">
-           Structuration d'un pitch (qui je suis / ce que j'aime / ce qui me rend unique).
-          </div>
-          <div class="skill-description">
-           Expression orale (diction, rythme, regard, posture).
-          </div>
-          <div class="skill-description">
-           Gestion du trac et de l'image (se voir / s'entendre).
-          </div>
-          <div class="skill-description">
-           Sélection d'arguments pertinents pour une situation donnée (emploi, formation…).
-          </div>
-          <div class="skill-description">
-           Usage basique de l'outil vidéo (enregistrement, partage).
-          </div>
-         </div>
-         <div class="tool-section">
-          <h4 class="tool-section-title">🎯 Déclinaison dans les 11 thèmes Mission Locale</h4>
-          <div class="theme-grid">
-           <div class="theme-item"><strong>Emploi</strong>
-            <p>Outil direct pour préparation entretien, job dating, forum emploi.</p>
-           </div>
-           <div class="theme-item"><strong>Formation</strong>
-            <p>Présenter sa candidature à une formation, un jury, un CFA.</p>
-           </div>
-           <div class="theme-item"><strong>Orientation</strong>
-            <p>Clarifier et verbaliser son cap actuel.</p>
-           </div>
-           <div class="theme-item"><strong>Mobilité</strong>
-            <p>Pitcher sa motivation pour un projet de mobilité (Erasmus, chantiers…).</p>
-           </div>
-           <div class="theme-item"><strong>Santé</strong>
-            <p>Travailler la confiance en soi, l'image corporelle, l'acceptation de sa voix/visage.</p>
-           </div>
-           <div class="theme-item"><strong>Logement</strong>
-            <p>Argumenter auprès de bailleurs / dispositifs logement (service civique, résidences).</p>
-           </div>
-           <div class="theme-item"><strong>Citoyenneté / relations</strong>
-            <p>Se présenter dans un collectif, un conseil de jeunes, une asso.</p>
-           </div>
-           <div class="theme-item"><strong>Finances</strong>
-            <p>Argumenter auprès d'un partenaire (micro-crédit, accompagnement budget).</p>
-           </div>
-           <div class="theme-item"><strong>Loisirs</strong>
-            <p>Présenter ses talents, projet bén��vole, projet culturel ou sportif.</p>
-           </div>
-           <div class="theme-item"><strong>Numérique</strong>
-            <p>Appropriation de la vidéo comme outil pro plutôt que seulement récréatif.</p>
-           </div>
-           <div class="theme-item"><strong>Mode de vie</strong>
-            <p>Dire ce qu'on veut changer / stabiliser dans son quotidien.</p>
-           </div>
-          </div>
-         </div>
-        </div>
-       </div><!-- Outil 8: Image de marque personnelle (Personal Branding) -->
-       <div class="tool-card" onclick="event.stopPropagation(); toggleTool(this)">
-        <div class="tool-header">
-         <div class="tool-icon">
-          🌟
-         </div>
-         <div class="tool-title">
-          Image de marque personnelle (Personal Branding)
-         </div><span class="tool-toggle">▼</span>
-        </div>
-        <div class="tool-content">
-         <div class="tool-section">
-          <h4 class="tool-section-title">💡 Compétences Life Skills travaillées</h4>
-          <div class="skill-description">
-           Identification de ses atouts cles (competences, qualites, valeurs).
-          </div>
-          <div class="skill-description">
-           Analyse des besoins de l'autre (employeur / client / partenaire).
-          </div>
-          <div class="skill-description">
-           Traduction des atouts en "valeur ajoutee" pour l'autre.
-          </div>
-          <div class="skill-description">
-           Positionnement (ce qui me distingue / ce que je propose).
-          </div>
-          <div class="skill-description">
-           Capacite a tenir un discours coherent sur soi (en CV, entretien, reseaux).
-          </div>
-         </div>
-         <div class="tool-section">
-          <h4 class="tool-section-title">🎯 Déclinaison dans les 11 thèmes Mission Locale</h4>
-          <div class="theme-grid">
-           <div class="theme-item"><strong>Emploi</strong>
-            <p>C��ur de l'outil : construire une offre de services personnelle crédible.</p>
-           </div>
-           <div class="theme-item"><strong>Formation</strong>
-            <p>Se positionner sur une formation en lien avec l'image professionnelle voulue.</p>
-           </div>
-           <div class="theme-item"><strong>Orientation</strong>
-            <p>Affiner la coherence entre projet et identite souhaitee.</p>
-           </div>
-           <div class="theme-item"><strong>Mobilité</strong>
-            <p>Être capable d'expliquer pourquoi on veut partir / revenir, ce que l'on apporte.</p>
-           </div>
-           <div class="theme-item"><strong>Santé</strong>
-            <p>Intégrer la notion de limites : une "marque perso" qui respecte ses besoins.</p>
-           </div>
-           <div class="theme-item"><strong>Logement</strong>
-            <p>Se présenter comme locataire / colocataire fiable.</p>
-           </div>
-           <div class="theme-item"><strong>Citoyenneté / relations</strong>
-            <p>Se positionner dans un groupe (rôle, contribution).</p>
-           </div>
-           <div class="theme-item"><strong>Finances</strong>
-            <p>Se vivre comme capable d'être responsable de ses revenus, facturation (freelance…).</p>
-           </div>
-           <div class="theme-item"><strong>Loisirs</strong>
-            <p>Intégrer les passions comme éléments différenciants dans son profil.</p>
-           </div>
-           <div class="theme-item"><strong>Numérique</strong>
-            <p>Traduire ce branding dans ses profils en ligne (LinkedIn, CV vidéo…).</p>
-           </div>
-           <div class="theme-item"><strong>Mode de vie</strong>
-            <p>Clarifier le style de vie voulu (rythme, équilibre) comme partie de la "marque".</p>
-           </div>
-          </div>
-         </div>
-        </div>
-       </div><!-- Outil 9: Exercice de négociation / auto-marketing -->
-       <div class="tool-card" onclick="event.stopPropagation(); toggleTool(this)">
-        <div class="tool-header">
-         <div class="tool-icon">
-          🤝
-         </div>
-         <div class="tool-title">
-          Exercice de négociation / auto-marketing (vente &amp; négociation)
-         </div><span class="tool-toggle">▼</span>
-        </div>
-        <div class="tool-content">
-         <div class="tool-section">
-          <h4 class="tool-section-title">💡 Compétences Life Skills travaillées</h4>
-          <div class="skill-description">
-           Preparation d'une situation de negociation (objectif, arguments, compromis possibles).
-          </div>
-          <div class="skill-description">
-           Analyse des interets des deux parties.
-          </div>
-          <div class="skill-description">
-           Communication assertive : exprimer sa demande, dire non, chercher un accord.
-          </div>
-          <div class="skill-description">
-           Regulation emotionnelle en interaction.
-          </div>
-          <div class="skill-description">
-           Lecture des dynamiques de pouvoir (ce qui se joue dans la situation).
-          </div>
-         </div>
-         <div class="tool-section">
-          <h4 class="tool-section-title">🎯 Déclinaison dans les 11 thèmes Mission Locale</h4>
-          <div class="theme-grid">
-           <div class="theme-item"><strong>Emploi</strong>
-            <p>Négocier un contrat, un aménagement d'horaires, une période d'essai.</p>
-           </div>
-           <div class="theme-item"><strong>Formation</strong>
-            <p>Discuter d'un changement de parcours, d'un délai, d'une adaptation.</p>
-           </div>
-           <div class="theme-item"><strong>Orientation</strong>
-            <p>Négocier avec la famille, les attentes sociales, les "métiers jugés sérieux".</p>
-           </div>
-           <div class="theme-item"><strong>Mobilité</strong>
-            <p>Négocier avec parents / conjoint / employeur autour d'une mobilité.</p>
-           </div>
-           <div class="theme-item"><strong>Santé</strong>
-            <p>Discuter d'aménagements avec médecin, employeur, école.</p>
-           </div>
-           <div class="theme-item"><strong>Logement</strong>
-            <p>Négocier un règlement de dette, un échéancier, un compromis avec coloc.</p>
-           </div>
-           <div class="theme-item"><strong>Citoyenneté / relations</strong>
-            <p>Gestion de conflits, médiation, participation à la décision.</p>
-           </div>
-           <div class="theme-item"><strong>Finances</strong>
-            <p>Négocier avec bailleur, banque, opérateur téléphonique…</p>
-           </div>
-           <div class="theme-item"><strong>Loisirs</strong>
-            <p>Mettre en place des compromis temps libre / obligations.</p>
-           </div>
-           <div class="theme-item"><strong>Numérique</strong>
-            <p>Négocier des règles d'usage (famille, coloc, soi-même).</p>
-           </div>
-           <div class="theme-item"><strong>Mode de vie</strong>
-            <p>Négocier des petits changements avec l'entourage (horaires, tâches…).</p>
-           </div>
-          </div>
-         </div>
-        </div>
-       </div><!-- Outil 10: Conçois ton magazine (Zine d'orientation) -->
-       <div class="tool-card" onclick="event.stopPropagation(); toggleTool(this)">
-        <div class="tool-header">
-         <div class="tool-icon">
-          📖
-         </div>
-         <div class="tool-title">
-          Conçois ton magazine (Zine d'orientation / "Mon magazine perso")
-         </div><span class="tool-toggle">▼</span>
-        </div>
-        <div class="tool-content">
-         <div class="tool-section">
-          <h4 class="tool-section-title">💡 Compétences Life Skills travaillées</h4>
-          <div class="skill-description">
-           Exploration identitaire a travers un support creatif.
-          </div>
-          <div class="skill-description">
-           Organisation de contenus (images, mots) autour d'un theme qui compte.
-          </div>
-          <div class="skill-description">
-           Projection (desirs, reves, objectifs).
-          </div>
-          <div class="skill-description">
-           Synthese visuelle de ce qui fait sens pour le jeune.
-          </div>
-          <div class="skill-description">
-           Auto-expression non scolaire (utile pour publics en rupture avec l'ecrit classique).
-          </div>
-         </div>
-         <div class="tool-section">
-          <h4 class="tool-section-title">🎯 Déclinaison dans les 11 thèmes Mission Locale</h4>
-          <div class="theme-grid">
-           <div class="theme-item"><strong>Emploi</strong>
-            <p>Faire émerger des envies de métiers, secteurs, environnements de travail.</p>
-           </div>
-           <div class="theme-item"><strong>Formation</strong>
-            <p>Identifier les compétences à développer en cohérence avec le thème choisi.</p>
-           </div>
-           <div class="theme-item"><strong>Orientation</strong>
-            <p>Support central de discussion sur le projet (ce qui compte, ce qu'on voudrait éviter).</p>
-           </div>
-           <div class="theme-item"><strong>Mobilité</strong>
-            <p>Inscrire des envies de voyages, d'ailleurs, de lieux ressources.</p>
-           </div>
-           <div class="theme-item"><strong>Santé</strong>
-            <p>Faire apparaître des besoins de protection, des peurs, des ressources.</p>
-           </div>
-           <div class="theme-item"><strong>Logement</strong>
-            <p>Visualiser le lieu de vie souhaité (univers, ambiance).</p>
-           </div>
-           <div class="theme-item"><strong>Citoyenneté / relations</strong>
-            <p>Thèmes d'engagement, injustices perçues, désirs de contribution.</p>
-           </div>
-           <div class="theme-item"><strong>Finances</strong>
-            <p>Évoquer des projets qui demandent des moyens financiers (permis, voyages…).</p>
-           </div>
-           <div class="theme-item"><strong>Loisirs</strong>
-            <p>Mettre au centre passions, créativités, pratiques artistiques ou sportives.</p>
-           </div>
-           <div class="theme-item"><strong>Numérique</strong>
-            <p>Possible déclinaison en zine digital / moodboard.</p>
-           </div>
-           <div class="theme-item"><strong>Mode de vie</strong>
-            <p>Représenter le rythme et le style de vie rêvé.</p>
-           </div>
-          </div>
-         </div>
-        </div>
-       </div>
-      </div>
-     </div><!-- AXE 3 -->
-     <div class="axe-card axe-3" onclick="toggleAxe(this)">
-      <div class="axe-header">
-       <div class="axe-number">
-        Axe 3
-       </div>
-       <div class="axe-title">
-        BIEN-ÊTRE PHYSIQUE &amp; MENTAL
-       </div>
-       <div class="axe-finalite"><strong>Finalité :</strong> disposer d'un minimum de stabilité intérieure et d'énergie pour pouvoir se projeter et agir.
-       </div>
-       <div style="text-align: center;"><span class="expand-icon">▼</span>
-       </div>
-      </div>
-      <div class="axe-content"><!-- Outil 11: Stressomètre -->
-       <div class="tool-card" onclick="event.stopPropagation(); toggleTool(this)">
-        <div class="tool-header">
-         <div class="tool-icon">
-          📊
-         </div>
-         <div class="tool-title">
-          Stressomètre : découvrez votre profil et agissez
-         </div><span class="tool-toggle">▼</span>
-        </div>
-        <div class="tool-content">
-         <div class="tool-section">
-          <h4 class="tool-section-title">💡 Compétences Life Skills travaillées</h4>
-          <div class="skill-description">
-           Auto-évaluation du stress (signaux, intensité).
-          </div>
-          <div class="skill-description">
-           Identification des amplificateurs de stress (pensées, situations, habitudes).
-          </div>
-          <div class="skill-description">
-           Normalisation / dédramatisation par comparaison au groupe.
-          </div>
-          <div class="skill-description">
-           Construction d'un plan d'action simple (1–3 gestes concrets).
-          </div>
-          <div class="skill-description">
-           Suivi dans le temps (revenir sur les engagements).
-          </div>
-         </div>
-         <div class="tool-section">
-          <h4 class="tool-section-title">🎯 Déclinaison dans les 11 thèmes Mission Locale</h4>
-          <div class="theme-grid">
-           <div class="theme-item"><strong>Emploi</strong>
-            <p>Comprendre le stress des entretiens, périodes d'essai, nouveaux collègues.</p>
-           </div>
-           <div class="theme-item"><strong>Formation</strong>
-            <p>Identifier la surcharge liée aux contrôles, devoirs, attentes scolaires.</p>
-           </div>
-           <div class="theme-item"><strong>Orientation</strong>
-            <p>Analyser l'angoisse liée aux choix d'avenir.</p>
-           </div>
-           <div class="theme-item"><strong>Mobilité</strong>
-            <p>Repérer le stress lié aux trajets, transports, permis.</p>
-           </div>
-           <div class="theme-item"><strong>Santé</strong>
-            <p>Cœur de l'outil : stress, signaux précoces, prévention du burnout / crises.</p>
-           </div>
-           <div class="theme-item"><strong>Logement</strong>
-            <p>Mettre �� jour le stress lié à la promiscuité, insécurité, instabilité.</p>
-           </div>
-           <div class="theme-item"><strong>Citoyenneté / relations</strong>
-            <p>Stress de groupe, conflits, prise de parole.</p>
-           </div>
-           <div class="theme-item"><strong>Finances</strong>
-            <p>Stress financier, dettes, découvert, injonctions familiales.</p>
-           </div>
-           <div class="theme-item"><strong>Loisirs</strong>
-            <p>Voir comment certaines activités déchargent / au contraire épuisent.</p>
-           </div>
-           <div class="theme-item"><strong>Numérique</strong>
-            <p>Stress lié aux réseaux, notifications, cyber-harcèlement, FOMO.</p>
-           </div>
-           <div class="theme-item"><strong>Mode de vie</strong>
-            <p>Lien direct avec sommeil, alimentation, rythme, temps d'écran.</p>
-           </div>
-          </div>
-         </div>
-        </div>
-       </div><!-- Outil 12: La roue des émotions -->
-       <div class="tool-card" onclick="event.stopPropagation(); toggleTool(this)">
-        <div class="tool-header">
-         <div class="tool-icon">
-          🎡
-         </div>
-         <div class="tool-title">
-          La roue des émotions
-         </div><span class="tool-toggle">▼</span>
-        </div>
-        <div class="tool-content">
-         <div class="tool-section">
-          <h4 class="tool-section-title">💡 Compétences Life Skills travaillées</h4>
-          <div class="skill-description">
-           Reconnaissance fine des emotions (au-dela de "ca va / ca va pas").
-          </div>
-          <div class="skill-description">
-           Lien situation → emotion → reaction.
-          </div>
-          <div class="skill-description">
-           Choix de strategies d'adaptation (ce qui m'apaise, ce qui m'enfonce).
-          </div>
-          <div class="skill-description">
-           Vocabulaire emotionnel (utile pour l'alliance de travail).
-          </div>
-          <div class="skill-description">
-           Debut d'auto-regulation (mettre une distance entre emotion et action).
-          </div>
-         </div>
-         <div class="tool-section">
-          <h4 class="tool-section-title">🎯 Déclinaison dans les 11 thèmes Mission Locale</h4>
-          <div class="theme-grid">
-           <div class="theme-item"><strong>Emploi</strong>
-            <p>Gérer colère, honte, peur en situation pro (erreur, remarque, conflit).</p>
-           </div>
-           <div class="theme-item"><strong>Formation</strong>
-            <p>Gérer la peur de l'échec, la honte d'un mauvais résultat, la frustration.</p>
-           </div>
-           <div class="theme-item"><strong>Orientation</strong>
-            <p>Verbaliser l'angoisse de se tromper, la pression familiale.</p>
-           </div>
-           <div class="theme-item"><strong>Mobilité</strong>
-            <p>Travailler la peur de l'inconnu, de se perdre, de conduire.</p>
-           </div>
-           <div class="theme-item"><strong>Santé</strong>
-            <p>Outil central pour parler de mal-être, phobie, anxiété, dépression.</p>
-           </div>
-           <div class="theme-item"><strong>Logement</strong>
-            <p>Nommer la peur, l'insécurité, la colère, la honte liées au logement.</p>
-           </div>
-           <div class="theme-item"><strong>Citoyenneté / relations</strong>
-            <p>Réguler émotions dans les conflits, débats, relations amoureuses.</p>
-           </div>
-           <div class="theme-item"><strong>Finances</strong>
-            <p>Gérer honte, culpabilité, peur liée à l'argent.</p>
-           </div>
-           <div class="theme-item"><strong>Loisirs</strong>
-            <p>Repérer ce qui procure joie, apaisement, fierté.</p>
-           </div>
-           <div class="theme-item"><strong>Numérique</strong>
-            <p>Identifier les émotions déclenchées par les réseaux (envie, comparaison, colère).</p>
-           </div>
-           <div class="theme-item"><strong>Mode de vie</strong>
-            <p>Comprendre l'impact d'habitudes (nuit blanche, isolement) sur l'état émotionnel.</p>
-           </div>
-          </div>
-         </div>
-        </div>
-       </div><!-- Outil 13: Arbre de la résilience -->
-       <div class="tool-card" onclick="event.stopPropagation(); toggleTool(this)">
-        <div class="tool-header">
-         <div class="tool-icon">
-          🌳
-         </div>
-         <div class="tool-title">
-          Arbre de la résilience
-         </div><span class="tool-toggle">▼</span>
-        </div>
-        <div class="tool-content">
-         <div class="tool-section">
-          <h4 class="tool-section-title">💡 Compétences Life Skills travaillées</h4>
-          <div class="skill-description">
-           Identification des racines ressources (valeurs, soutien, experiences passees).
-          </div>
-          <div class="skill-description">
-           Reconnaissance des competences deja acquises (tronc).
-          </div>
-          <div class="skill-description">
-           Projection de possibles (branches, feuilles : projets, envies).
-          </div>
-          <div class="skill-description">
-           Lecture narrative de son histoire : pas seulement des echecs.
-          </div>
-          <div class="skill-description">
-           Resilience : capacite a voir comment on a deja tenu / rebondi.
-          </div>
-         </div>
-         <div class="tool-section">
-          <h4 class="tool-section-title">🎯 Déclinaison dans les 11 thèmes Mission Locale</h4>
-          <div class="theme-grid">
-           <div class="theme-item"><strong>Emploi</strong>
-            <p>Met en avant des exemples de perseverance, d'adaptation utiles en entretien.</p>
-           </div>
-           <div class="theme-item"><strong>Formation</strong>
-            <p>Relire les reussites meme petites, malgre les decrochages.</p>
-           </div>
-           <div class="theme-item"><strong>Orientation</strong>
-            <p>Relier parcours chaotique a des ressources et pas seulement a des rates.</p>
-           </div>
-           <div class="theme-item"><strong>Mobilité</strong>
-            <p>Identifier des experiences ou le jeune a deja su "s'en sortir ailleurs".</p>
-           </div>
-           <div class="theme-item"><strong>Santé</strong>
-            <p>Se voir comme capable de traverser des periodes difficiles.</p>
-           </div>
-           <div class="theme-item"><strong>Logement</strong>
-            <p>Revisiter des episodes de crise (expulsion, rupture) en montrant ce qui l'a aide.</p>
-           </div>
-           <div class="theme-item"><strong>Citoyenneté / relations</strong>
-            <p>Valoriser les soutiens relationnels, l'entraide, les figures appui.</p>
-           </div>
-           <div class="theme-item"><strong>Finances</strong>
-            <p>Voir comment il a deja gere des periodes de tension financiere.</p>
-           </div>
-           <div class="theme-item"><strong>Loisirs</strong>
-            <p>Integrer des pratiques qui ont aide a tenir (sport, arts…) comme branches de l'arbre.</p>
-           </div>
-           <div class="theme-item"><strong>Numérique</strong>
-            <p>Parler des usages numeriques qui ont ete soutien ou frein dans les crises.</p>
-           </div>
-           <div class="theme-item"><strong>Mode de vie</strong>
-            <p>Identifier des changements de routine qui ont deja ameliore le quotidien.</p>
-           </div>
-          </div>
-         </div>
-        </div>
-       </div><!-- Outil 14: Portfolio de démarcation (limites) -->
-       <div class="tool-card" onclick="event.stopPropagation(); toggleTool(this)">
-        <div class="tool-header">
-         <div class="tool-icon">
-          🛡️
-         </div>
-         <div class="tool-title">
-          Portfolio de démarcation (limites)
-         </div><span class="tool-toggle">▼</span>
-        </div>
-        <div class="tool-content">
-         <div class="tool-section">
-          <h4 class="tool-section-title">💡 Compétences Life Skills travaillées</h4>
-          <div class="skill-description">
-           Poser des limites spatiales / temporelles / sociales / mentales.
-          </div>
-          <div class="skill-description">
-           Protection de soi : savoir dire non, couper, se retirer.
-          </div>
-          <div class="skill-description">
-           Organisation de son énergie (ce à quoi je dis oui / non).
-          </div>
-          <div class="skill-description">
-           Prévention du stress en amont.
-          </div>
-          <div class="skill-description">
-           Clarification des priorités.
-          </div>
-         </div>
-         <div class="tool-section">
-          <h4 class="tool-section-title">�� Déclinaison dans les 11 thèmes Mission Locale</h4>
-          <div class="theme-grid">
-           <div class="theme-item"><strong>Emploi</strong>
-            <p>Éviter la surexploitation, clarifier ce qui est acceptable ou non.</p>
-           </div>
-           <div class="theme-item"><strong>Formation</strong>
-            <p>Définir un cadre de travail et de repos (temps d'écran, révisions…).</p>
-           </div>
-           <div class="theme-item"><strong>Orientation</strong>
-            <p>Ne pas se laisser entièrement dicter son projet par les autres.</p>
-           </div>
-           <div class="theme-item"><strong>Mobilité</strong>
-            <p>Dire non à des conditions de déplacement dangereuses / intenable.</p>
-           </div>
-           <div class="theme-item"><strong>Santé</strong>
-            <p>Se protéger de situations toxiques, d'abus, de surcharge.</p>
-           </div>
-           <div class="theme-item"><strong>Logement</strong>
-            <p>Mettre des limites en coloc, en famille, dans un foyer.</p>
-           </div>
-           <div class="theme-item"><strong>Citoyenneté / relations</strong>
-            <p>S'affirmer dans les relations, stopper certaines interactions.</p>
-           </div>
-           <div class="theme-item"><strong>Finances</strong>
-            <p>Fixer des limites à des sollicitations financières (famille, amis…).</p>
-           </div>
-           <div class="theme-item"><strong>Loisirs</strong>
-            <p>Garder un équilibre entre loisirs et obligations.</p>
-           </div>
-           <div class="theme-item"><strong>Numérique</strong>
-            <p>Limites d'usage, de contenus, protection de la vie privée.</p>
-           </div>
-           <div class="theme-item"><strong>Mode de vie</strong>
-            <p>Poser un cadre minimal (sommeil, alimentation, temps pour soi).</p>
-           </div>
-          </div>
-         </div>
-        </div>
-       </div>
-      </div>
-     </div><!-- AXE 4 -->
-     <div class="axe-card axe-4" onclick="toggleAxe(this)">
-      <div class="axe-header">
-       <div class="axe-number">
-        Axe 4
-       </div>
-       <div class="axe-title">
-        RESSOURCES MATÉRIELLES &amp; FINANCIÈRES
-       </div>
-       <div class="axe-finalite"><strong>Finalité :</strong> savoir mobiliser et organiser les ressources concrètes qui permettent d'agir dans la vraie vie.
-       </div>
-       <div style="text-align: center;"><span class="expand-icon">▼</span>
-       </div>
-      </div>
-      <div class="axe-content"><!-- Outil 15: "Faites le point" (Mindmapping ressources matérielles & financières) -->
-       <div class="tool-card" onclick="event.stopPropagation(); toggleTool(this)">
-        <div class="tool-header">
-         <div class="tool-icon">
-          🗺️
-         </div>
-         <div class="tool-title">
-          "Faites le point" (Mindmapping ressources matérielles &amp; financières)
-         </div><span class="tool-toggle">▼</span>
-        </div>
-        <div class="tool-content">
-         <div class="tool-section">
-          <h4 class="tool-section-title">💡 Compétences Life Skills travaillées</h4>
-          <div class="skill-description">
-           Cartographie des ressources materielles (logement, transport, equipements…).
-          </div>
-          <div class="skill-description">
-           Cartographie des ressources financieres (revenus, aides, dettes).
-          </div>
-          <div class="skill-description">
-           Hierarchisation des urgences : ce qui est critique vs ce qui est secondaire.
-          </div>
-          <div class="skill-description">
-           Reperage des dispositifs : ce que je connais / ce que je ne connais pas.
-          </div>
-          <div class="skill-description">
-           Capacite a demander de l'aide sur un point precis (budget, logement, mobilite).
-          </div>
-         </div>
-         <div class="tool-section">
-          <h4 class="tool-section-title">🎯 Déclinaison dans les 11 thèmes Mission Locale</h4>
-          <div class="theme-grid">
-           <div class="theme-item"><strong>Emploi</strong>
-            <p>Vérifier si les ressources matérielles permettent l'accès à un emploi (transport, tenue, équipement).</p>
-           </div>
-           <div class="theme-item"><strong>Formation</strong>
-            <p>Conditions matérielles pour suivre une formation (trajet, équipement numérique, etc.).</p>
-           </div>
-           <div class="theme-item"><strong>Orientation</strong>
-            <p>Intégrer les contraintes / ressources matérielles dans le choix du parcours.</p>
-           </div>
-           <div class="theme-item"><strong>Mobilité</strong>
-            <p>Mise à plat de tous les moyens de déplacement disponibles / activables.</p>
-           </div>
-           <div class="theme-item"><strong>Santé</strong>
-            <p>Intégrer les coûts (soins, mutuelle, transport santé).</p>
-           </div>
-           <div class="theme-item"><strong>Logement</strong>
-            <p>Mettre à plat la situation logement et les leviers possibles (CAF, bailleurs, foyers).</p>
-           </div>
-           <div class="theme-item"><strong>Citoyenneté / relations</strong>
-            <p>Repérer les réseaux et lieux ressources (asso, CCAS, ML…).</p>
-           </div>
-           <div class="theme-item"><strong>Finances</strong>
-            <p>Cœur de l'outil : vision globale budget, aides, dettes, charges.</p>
-           </div>
-           <div class="theme-item"><strong>Loisirs</strong>
-            <p>Savoir quelles activités sont possibles à moindre coût / gratuites.</p>
-           </div>
-           <div class="theme-item"><strong>Numérique</strong>
-            <p>Accès à l'outil (téléphone, data, Wi-Fi, PC) comme ressource clé.</p>
-           </div>
-           <div class="theme-item"><strong>Mode de vie</strong>
-            <p>Construire un quotidien réaliste en fonction des moyens et des ressources.</p>
-           </div>
-          </div>
-         </div>
-        </div>
-       </div><!-- Outil 16: Vraie vie, vrais défis (jeu de rôle budget de vie) -->
-       <div class="tool-card" onclick="event.stopPropagation(); toggleTool(this)">
-        <div class="tool-header">
-         <div class="tool-icon">
-          🎮
-         </div>
-         <div class="tool-title">
-          Vraie vie, vrais défis (jeu de rôle budget de vie)
-         </div><span class="tool-toggle">▼</span>
-        </div>
-        <div class="tool-content">
-         <div class="tool-section">
-          <h4 class="tool-section-title">💡 Compétences Life Skills travaillées</h4>
-          <div class="skill-description">
-           Comprehension du budget (entrees/sorties) : visualiser concretement revenus et depenses.
-          </div>
-          <div class="skill-description">
-           Arbitrage &amp; priorisation des depenses : choisir entre besoins essentiels et secondaires.
-          </div>
-          <div class="skill-description">
-           Gestion de l'imprevu et des risques : reagir face a des defis financiers inattendus.
-          </div>
-          <div class="skill-description">
-           Negociation / recherche de solutions : trouver des alternatives creatives et realistes.
-          </div>
-          <div class="skill-description">
-           Travail en equipe et prise de decision collective : discuter et decider ensemble.
-          </div>
-          <div class="skill-description">
-           Projection dans la vie adulte : anticiper les realites du logement, du travail et du mode de vie.
-          </div>
-         </div>
-         <div class="tool-section">
-          <h4 class="tool-section-title">🎯 Déclinaison dans les 11 thèmes Mission Locale</h4>
-          <div class="theme-grid">
-           <div class="theme-item"><strong>Emploi</strong>
-            <p>Comprendre le lien salaire et niveau de vie. Relier metier, type de contrat et budget realiste.</p>
-           </div>
-           <div class="theme-item"><strong>Formation</strong>
-            <p>Integrer le cout d'une periode de formation. Comparer "travailler maintenant" vs "se former pour gagner plus".</p>
-           </div>
-           <div class="theme-item"><strong>Orientation</strong>
-            <p>Projeter un mode de vie associe a un projet. Comprendre l'impact des choix professionnels sur le budget.</p>
-           </div>
-           <div class="theme-item"><strong>Mobilité</strong>
-            <p>Integrer le cout des transports. Arbitrer entre voiture, transports en commun, velo selon le budget.</p>
-           </div>
-           <div class="theme-item"><strong>Santé</strong>
-            <p>Comprendre que sante = depense reelle. Arbitrer entre plaisir et prevention (mutuelle, soins).</p>
-           </div>
-           <div class="theme-item"><strong>Logement</strong>
-            <p>Comprendre le poids du logement. Comparer coloc / studio / chez les parents selon les revenus.</p>
-           </div>
-           <div class="theme-item"><strong>Citoyenneté / relations</strong>
-            <p>Negocier et argumenter en groupe. Gerer les desaccords sur les priorites budgetaires.</p>
-           </div>
-           <div class="theme-item"><strong>Finances</strong>
-            <p>Coeur de l'outil : construction budget complet, gestion imprevus, arbitrage depenses, introduction a l'epargne.</p>
-           </div>
-           <div class="theme-item"><strong>Loisirs</strong>
-            <p>Prendre conscience du cout des loisirs. Prioriser ce qu'on garde pour son equilibre malgre les contraintes.</p>
-           </div>
-           <div class="theme-item"><strong>Numérique</strong>
-            <p>Integrer le cout des abonnements numeriques dans le budget global.</p>
-           </div>
-           <div class="theme-item"><strong>Mode de vie</strong>
-            <p>Clarifier le mode de vie souhaite et verifier sa faisabilite financiere concrete.</p>
-           </div>
-          </div>
-         </div>
-        </div>
-       </div><!-- Outil 17: Du chèque de paie à la poche (brut / net, fiches de paie) -->
-       <div class="tool-card" onclick="event.stopPropagation(); toggleTool(this)">
-        <div class="tool-header">
-         <div class="tool-icon">
-          💰
-         </div>
-         <div class="tool-title">
-          Du chèque de paie à la poche (brut / net, fiches de paie)
-         </div><span class="tool-toggle">▼</span>
-        </div>
-        <div class="tool-content">
-         <div class="tool-section">
-          <h4 class="tool-section-title">💡 Compétences Life Skills travaillées</h4>
-          <div class="skill-description">
-           Comprehension de la fiche de paie : decrypter les lignes essentielles d'un bulletin de salaire.
-          </div>
-          <div class="skill-description">
-           Lecture de documents administratifs complexes : apprivoiser un document technique.
-          </div>
-          <div class="skill-description">
-           Notions de cotisations, impots, protection sociale : comprendre a quoi servent les prelevements.
-          </div>
-          <div class="skill-description">
-           Decisions eclairees sur les contrats / jobs : comparer differents types de contrats (CDD, CDI, interim).
-          </div>
-          <div class="skill-description">
-           Projection sur un revenu reellement disponible : distinguer brut et net pour construire un budget realiste.
-          </div>
-         </div>
-         <div class="tool-section">
-          <h4 class="tool-section-title">🎯 Déclinaison dans les 11 thèmes Mission Locale</h4>
-          <div class="theme-grid">
-           <div class="theme-item"><strong>Emploi</strong>
-            <p>Lire une fiche de paie. Comprendre les differences CDD/CDI/interim en termes de revenu net. Identifier les cotisations comme protection et pas seulement "perte".</p>
-           </div>
-           <div class="theme-item"><strong>Formation</strong>
-            <p>Comparer remuneration formation vs job alimentaire. Integrer la protection sociale associee a certains statuts.</p>
-           </div>
-           <div class="theme-item"><strong>Orientation</strong>
-            <p>Relier metiers et bandes de salaire realistes. Comprendre l'impact des evolutions de carriere sur le net.</p>
-           </div>
-           <div class="theme-item"><strong>Mobilité</strong>
-            <p>Integrer dans le calcul la part du salaire consacree aux deplacements. Comprendre l'interet des aides mobilite employeur (prime transport).</p>
-           </div>
-           <div class="theme-item"><strong>Santé</strong>
-            <p>Comprendre l'interet des cotisations sante/prevoyance. Relier salaire net et protection.</p>
-           </div>
-           <div class="theme-item"><strong>Logement</strong>
-            <p>Lier salaire net et capacite de loyer. Comprendre certaines exigences de bailleurs (3 x loyer, etc.).</p>
-           </div>
-           <div class="theme-item"><strong>Citoyenneté / relations</strong>
-            <p>Comprendre les logiques collectives des cotisations (solidarite, protection). Parler d'argent et de droits sans honte.</p>
-           </div>
-           <div class="theme-item"><strong>Finances</strong>
-            <p>Savoir partir du net disponible pour construire son budget. Anticiper les variations de revenus (heures sup, primes).</p>
-           </div>
-           <div class="theme-item"><strong>Loisirs</strong>
-            <p>Comprendre ce qui reste vraiment pour le "reste a vivre". Faire des choix de loisirs en lien avec le net reel.</p>
-           </div>
-           <div class="theme-item"><strong>Numérique</strong>
-            <p>Utiliser des simulateurs en ligne (brut/net). Lire des documents numeriques (fiche de paie dematerialisee).</p>
-           </div>
-           <div class="theme-item"><strong>Mode de vie</strong>
-            <p>Relier niveau de vie et salaire net, pas seulement "montant sur le contrat". Arbitrer ses habitudes quotidiennes en fonction d'un revenu stable.</p>
-           </div>
-          </div>
-         </div>
-        </div>
-       </div><!-- Outil 18: Littératie financière – études de cas & profils budgétaires -->
-       <div class="tool-card" onclick="event.stopPropagation(); toggleTool(this)">
-        <div class="tool-header">
-         <div class="tool-icon">
-          📊
-         </div>
-         <div class="tool-title">
-          Littératie financière – études de cas &amp; profils budgétaires
-         </div><span class="tool-toggle">▼</span>
-        </div>
-        <div class="tool-content">
-         <div class="tool-section">
-          <h4 class="tool-section-title">💡 Compétences Life Skills travaillées</h4>
-          <div class="skill-description">
-           Analyse de situations financieres reelles : decortiquer des cas concrets de personnes avec revenus, depenses, dettes.
-          </div>
-          <div class="skill-description">
-           Detection de risques : reperer decouvert, surendettement, depenses toxiques dans un profil budgetaire.
-          </div>
-          <div class="skill-description">
-           Construction de strategies realistes de redressement : proposer des ajustements concrets (reduire, reorganiser, epargner).
-          </div>
-          <div class="skill-description">
-           Travail collaboratif et argumentation : analyser en groupe et presenter une strategie coherente.
-          </div>
-          <div class="skill-description">
-           Mise en place d'habitudes financieres responsables : integrer epargne, priorisation, gestion des imprevus.
-          </div>
-         </div>
-         <div class="tool-section">
-          <h4 class="tool-section-title">🎯 Déclinaison dans les 11 thèmes Mission Locale</h4>
-          <div class="theme-grid">
-           <div class="theme-item"><strong>Emploi</strong>
-            <p>Comprendre les effets d'un type de contrat sur la stabilite du budget. Anticiper les periodes "creuses" (interim, saisonnier, missions courtes).</p>
-           </div>
-           <div class="theme-item"><strong>Formation</strong>
-            <p>Integrer les periodes sans revenu ou faiblement remunerees dans un plan global. Simuler "avant / pendant / apres" formation.</p>
-           </div>
-           <div class="theme-item"><strong>Orientation</strong>
-            <p>Relier certains choix de projet a des profils de revenus / charges (ville chere, secteur mal paye). Reperer les incoherences budgetaires.</p>
-           </div>
-           <div class="theme-item"><strong>Mobilité</strong>
-            <p>Voir l'impact immediat d'un achat de voiture a credit, d'un abonnement, d'un demenagement sur le budget.</p>
-           </div>
-           <div class="theme-item"><strong>Santé</strong>
-            <p>Mettre en evidence le cout possible de problemes de sante (arret de travail, soins non couverts). Prevoir une epargne de precaution.</p>
-           </div>
-           <div class="theme-item"><strong>Logement</strong>
-            <p>Reperer les situations de logement non soutenable (loyer trop eleve, charges). Proposer des pistes realistes : colocation, demenagement.</p>
-           </div>
-           <div class="theme-item"><strong>Citoyenneté / relations</strong>
-            <p>Parler d'argent a plusieurs, confronter des points de vue sans jugement. Comprendre comment les choix d'un membre du foyer impactent les autres.</p>
-           </div>
-           <div class="theme-item"><strong>Finances</strong>
-            <p>Developper une vision globale du budget (revenus, depenses, dettes, objectifs). Construire un plan d'action : reduire, renegocier, echelonner, epargner.</p>
-           </div>
-           <div class="theme-item"><strong>Loisirs</strong>
-            <p>Distinguer ce qui, dans les loisirs, est "intouchable" pour l'equilibre et ce qui peut etre ajuste dans le budget.</p>
-           </div>
-           <div class="theme-item"><strong>Numérique</strong>
-            <p>Utiliser des tableurs ou feuilles de calcul pour simuler des scenarios. Visualiser l'impact de petites modifications budgetaires.</p>
-           </div>
-           <div class="theme-item"><strong>Mode de vie</strong>
-            <p>Comprendre l'effet cumulatif de petites habitudes couteuses. Construire un mode de vie plus soutenable sans renoncer a tout.</p>
-           </div>
-          </div>
-         </div>
-        </div>
-       </div>
-      </div>
-     </div>
-    </div>
-   </div>
-  </div><!-- Frise décorative en bas -->
-  <div class="bottom-decoration">
-   <div class="decoration-segment"></div>
-   <div class="decoration-segment"></div>
-   <div class="decoration-segment"></div>
-   <div class="decoration-segment"></div>
-   <div class="decoration-segment"></div>
-   <div class="decoration-segment"></div>
+    </div> <!-- fin axes-grid -->
   </div>
+
+  <!-- Frise décorative en bas -->
+  <div class="bottom-decoration">
+    <div class="decoration-segment"></div>
+    <div class="decoration-segment"></div>
+    <div class="decoration-segment"></div>
+    <div class="decoration-segment"></div>
+    <div class="decoration-segment"></div>
+    <div class="decoration-segment"></div>
+  </div>
+
   <script>
-        const defaultConfig = {
-            main_title: "Les 4 axes Life Skills = 4 grandes familles de compétences"
-        };
+    const defaultConfig = {
+      main_title: "Les 4 Axes Life Skills = 4 grandes familles de compétences"
+    };
 
-        const config = window.elementSdk ? window.elementSdk.config : defaultConfig;
+    const config = window.elementSdk ? window.elementSdk.config : defaultConfig;
 
-        async function onConfigChange(newConfig) {
-            const mainTitle = document.getElementById('main-title');
-            if (mainTitle) {
-                mainTitle.textContent = newConfig.main_title || defaultConfig.main_title;
-            }
+    async function onConfigChange(newConfig) {
+      const mainTitle = document.getElementById('main-title');
+      if (mainTitle) {
+        mainTitle.textContent = newConfig.main_title || defaultConfig.main_title;
+      }
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ["main_title", config.main_title || defaultConfig.main_title]
+      ]);
+    }
+
+    function toggleAxe(card) {
+      card.classList.toggle('expanded');
+    }
+
+    function toggleSkill(skillItem) {
+      skillItem.classList.toggle('expanded');
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+  </script>
+  <script>
+    (function(){
+      function c(){
+        var b=a.contentDocument||a.contentWindow.document;
+        if(b){
+          var d=b.createElement('script');
+          d.innerHTML="window.__CF$cv$params={r:'XXX',t:'XXXXXXXXXXXX'};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+          b.getElementsByTagName('head')[0].appendChild(d)
         }
-
-        function mapToCapabilities(config) {
-            return {
-                recolorables: [],
-                borderables: [],
-                fontEditable: undefined,
-                fontSizeable: undefined
-            };
+      }
+      if(document.body){
+        var a=document.createElement('iframe');
+        a.height=1;a.width=1;
+        a.style.position='absolute';
+        a.style.top=0;a.style.left=0;
+        a.style.border='none';
+        a.style.visibility='hidden';
+        document.body.appendChild(a);
+        if('loading'!==document.readyState)c();
+        else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);
+        else{
+          var e=document.onreadystatechange||function(){};
+          document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}
         }
-
-        function mapToEditPanelValues(config) {
-            return new Map([
-                ["main_title", config.main_title || defaultConfig.main_title]
-            ]);
-        }
-
-        function toggleAxe(card) {
-            card.classList.toggle('expanded');
-        }
-
-        function toggleTool(toolCard) {
-            toolCard.classList.toggle('expanded');
-        }
-
-        if (window.elementSdk) {
-            window.elementSdk.init({
-                defaultConfig,
-                onConfigChange,
-                mapToCapabilities,
-                mapToEditPanelValues
-            });
-        }
-    </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a0ecd7854ccd347',t:'MTc2MzU0NTgxOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+      }
+    })();
+  </script>
+</body>
 </html>
